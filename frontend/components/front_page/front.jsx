@@ -21,13 +21,13 @@ class Front extends React.Component {
             <source src="http://res.cloudinary.com/dluh2fsyd/video/upload/v1516825950/waves_njc6dg.mp4" type="video/mp4"/>
           </video>
           <div className="front-video-overlay">
-            <div className="front-page-header">
+            <div className="overlay-header">
               <h2>Island BnB</h2>
             </div>
-            <div className="front-page-header">
+            <div className="overlay-caption">
               <h3>Because a real getaway is surrounded by the sea</h3>
             </div>
-            <div className="front-page-button">
+            <div className="overlay-button">
               <button>Start your voyage now</button>
             </div>
           </div>
