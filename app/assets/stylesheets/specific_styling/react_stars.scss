@@ -1,0 +1,42 @@
+
+.review-header {
+  div {
+    div {
+      z-index: -500;
+    }
+    span {
+      z-index: -1;
+      cursor: default !important;
+    }
+  }
+}
+
+.display-all-rooms  {
+  ul {
+    li {
+      div {
+        z-index: -500;
+        div {
+          z-index: -500;
+        }
+        span {
+          z-index: -1;
+          cursor: default !important;
+        }
+      }
+    }
+  }
+}
+
+.review-details {
+  div {
+    div {
+      z-index: -500;
+    }
+
+    span {
+      z-index: -1;
+      cursor: default !important;
+    }
+  }
+}

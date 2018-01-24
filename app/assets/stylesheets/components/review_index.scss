@@ -1,0 +1,37 @@
+.index-list {
+  list-style: none;
+
+}
+.top-of-review {
+  display: flex;
+  flex-direction: row;
+  img {
+    height: 50px;
+    width: 50px;
+
+  }
+}
+.review-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .react-stars, h2, button {
+    margin-left: 10px;
+    padding-right: 10px;
+  }
+}
+.review-index-item {
+  padding: 20px;
+  border-bottom: solid 1px lightgrey;
+
+}
+
+.review-details {
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  padding-left: 15px;
+}

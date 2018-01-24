@@ -1,0 +1,29 @@
+.trip-index {
+  list-style: none;
+}
+#your-trips {
+  padding-left: 10px;
+  font-size: 30px;
+  font-weight: 400;
+}
+.trip-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px lightgrey solid;
+  img {
+    height: 200px;
+    width: 300px;
+  }
+  div {
+    padding-left: 10px;
+    h2 {
+      font-weight: normal;
+      text-decoration: underline;
+    }
+    h4 {
+      font-weight: lighter;
+      padding-left: 10px;
+    }
+  }
+}

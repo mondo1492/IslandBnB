@@ -1,0 +1,33 @@
+.listing-index-container {
+  list-style: none;
+}
+
+#your-listings {
+  padding-left: 10px;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.listing-index-item {
+  padding-bottom: 20px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px lightgrey solid;
+  img {
+    height: 200px;
+    width: 300px;
+  }
+  div {
+    padding-left: 10px;
+    h2 {
+      font-weight: normal;
+      text-decoration: underline;
+    }
+    h4 {
+      font-weight: lighter;
+      padding-left: 10px;
+    }
+  }
+}

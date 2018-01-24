@@ -1,0 +1,60 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+ * {
+   font-family: sans-serif;
+   outline: none;
+ }
+
+
+
+ #all-content {
+   margin: 0;
+   pading: 0;
+   position: relative;
+   z-index:50;
+ }
+
+ .gm-style-iw + div {display: none;}
+
+ .booking {
+   padding-bottom: 500px;
+ }
+
+@import './components/colors.scss';
+@import './components/header.scss';
+@import './components/modal.scss';
+@import './components/session-form.scss';
+@import './components/left_lower_nav.scss';
+@import './components/new_room_form.scss';
+@import './specific_styling/drop_downs.scss';
+@import './components/show_room.scss';
+@import './components/home_search.scss';
+@import './specific_styling/search_params.scss';
+@import './components/review-create.scss';
+@import './specific_styling/react_stars.scss';
+@import './components/review_index.scss';
+@import './components/trips.scss';
+@import './components/listing.scss';
+@import './components/react-dates.scss';
+@import './specific_styling/video.scss'
+//
+// body {
+//    min-width:1000px !important;
+//    width: auto !important;
+//    width: 500px;
+//
+//
+// }

@@ -1,0 +1,51 @@
+.left-lower-nav {
+  padding-top: 60px;
+  position: fixed;
+  background: white;
+  z-index: 60;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  height: 50px;
+  box-shadow: 0 0 2px 0px gray;
+  button {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    text-decoration: none;
+    padding-right: 15px;
+    padding-left: 25px;
+    padding-bottom: 11px;
+    //question about no underline on div
+
+    font-family: sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #505050;
+
+  }
+  // button:focus {
+  //   // text-decoration: underline;
+  //   color: $light-blue;
+  //   padding-bottom: 9px;
+  //   border-bottom: 2px solid $light-blue;
+  // }
+  //
+  // button:active {
+  //   text-decoration: underline;
+  //   color: $light-blue;
+  //   padding-bottom: 9px;
+  //   border-bottom: 2px solid $light-blue;
+  // }
+  button {
+    // text-decoration: underline;
+    color: $light-blue;
+    padding-bottom: 9px;
+    border-bottom: 2px solid $light-blue;
+  }
+
+
+}

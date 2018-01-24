@@ -1,0 +1,234 @@
+.show-main-content {
+  // display: flex;
+  // justify-content: space-around;
+}
+
+.show-page-picture {
+  padding-top: 40%;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.show-page-nav-links {
+  // border: 1px solid black;
+  ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: flex-start;
+    align-items: center;
+    .dot{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+}
+
+.show-page-title {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top: 1px solid lightgrey;
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 0px;
+    font-size: 36px;
+    font-weight: 700px;
+    letter-spacing: 0.4px;
+  }
+  h4 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    letter-spacing: 0.2px;
+    color: grey;
+    font-weight: lighter;
+  }
+}
+
+.show-page-features {
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  padding-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  ul{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: grey;
+      h4 {
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.show-page-description {
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid lightgrey;
+  h2 {
+    font-size: 22px;
+    font-weight: normal;
+  }
+  h4 {
+    font-size: 17px;
+    font-weight: 500;
+    padding-left: 20px;
+  }
+  p {
+    padding-left: 40px;
+    font-weight: lighter;
+  }
+}
+.show-page-more-details {
+  .detail-container, .detail-container-cancellation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .detail-item {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 10%;
+    min-width: 90px;
+    padding-top: 18px;
+    h4 {
+      font-weight: 400;
+    }
+
+  }
+  .detail-list {
+    border-bottom: 1px solid lightgrey;
+    margin-left: 0;
+    ul{
+      margin-left: 0;
+      padding-left: 0;
+      max-width: 455px;
+      margin-bottom: 20px;
+
+      overflow: hidden;
+      flex-direction: row;
+      justify-content: flex-start;
+
+
+      li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 225px;
+        height: 50px;
+        line-height:1.5em;
+        // border-bottom:1px solid #ccc;
+        float: left;
+        // display:inline;
+        h4 {
+          padding-left: 10px;
+          font-weight: normal;
+        }
+        #cost-bold {
+          font-size: 20px;
+          font-weight: bolder;
+        }
+      }
+      .detail-list-name {
+
+        font-weight: lighter;
+      }
+    }
+  }
+
+}
+
+.detail-container-cancellation {
+  // margin-right: 20px;
+  #cancellation-text, #cancellation-policy{
+    max-width: 455px;
+    min-width: 100px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    font-weight: lighter;
+  }
+
+
+}
+// <div className="show-page-more-details">
+//   <div className="detail-item">
+//     <h4>The space</h4>
+//     <div className="detail-list">
+
+.floating-booking {
+  padding-left: 20px;
+  div {
+    padding-left: 10px;
+  }
+
+
+}
+
+.guest-booking {
+  padding: 10px;
+  padding-bottom: 80px;
+  width: 400px;
+  border: 1px solid lightgrey;
+  div {
+    h2 {
+      font-size: 15px;
+    }
+    input {
+      font-size: 15px;
+      margin-left: 20px;
+    }
+  }
+
+}
+.calculate-button {
+    display: flex;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    text-align: center;
+    background-color: $orange;
+    color: white;
+
+}
+
+.book-room-show-price {
+  padding: 10px;
+  padding-bottom: 80px;
+  width: 400px;
+  border: 1px solid lightgrey;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  div {
+    display: flex;
+    flex-direction: row;
+    h2 {
+      font-weight: lighter;
+
+    }
+    .booking-price {
+      font-weight: bolder;
+      padding-left: 5px;
+    }
+  }
+}

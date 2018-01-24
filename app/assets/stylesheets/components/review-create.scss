@@ -1,0 +1,67 @@
+.review-container {
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  div {
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h3 {
+      padding: none;
+      margin: none;
+    }
+    textarea {
+      font-size: 15px;
+      height: 150px;
+    }
+    select {
+      font-size: 15px;
+      padding-bottom: 20px;
+    }
+  }
+  button {
+    cursor: pointer;
+    margin-top: 30px;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background: none;
+    border: none;
+    background-color: $orange;
+    color: white;
+  }
+}
+
+.calculate-button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    text-align: center;
+    background-color: $orange;
+    color: white;
+  }
+}
+
+#review-button-main2 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 20px;
+  font-size: 15px;
+  text-align: center;
+  background-color: $orange;
+  color: white;
+}
