@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../header.jsx';
 
 import MainDisplayContainer from '../main_display/main_display_container';
 import GoogleMap from './map';
@@ -48,6 +49,9 @@ class Search extends React.Component {
 
   searchParameters() {
     return(
+      <div>
+        <Header/>
+
       <div className="search-params-container">
         <ul>
           <li>
@@ -79,6 +83,7 @@ class Search extends React.Component {
           </li>
         </ul>
         <button id="change-bed-number">Update map!</button>
+      </div>
       </div>
     );
   }

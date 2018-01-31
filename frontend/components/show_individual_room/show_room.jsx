@@ -7,9 +7,17 @@ import Description from './description';
 import MoreDetails from './more_details';
 import ReviewsContainer from '../reviews/reviews_container';
 import TripsContainer from '../trips/trips_container';
+import Header from '../header.jsx';
 
 class ShowRoom extends React.Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      room: this.props.room
+    };
+  }
+
+  componentDidMount() {
     this.props.showRoom(this.props.match.params.id);
   }
 
@@ -17,7 +25,7 @@ class ShowRoom extends React.Component {
     const bannerPictureStyle = {
       height: "100%",
       width: "100%",
-      backgroundImage: `url(${this.props.room.pic_url})`
+      backgroundImage: `url(${this.state.room.pic_url})`
     };
     return(
       <div className="show-page-picture"
@@ -32,14 +40,16 @@ class ShowRoom extends React.Component {
         <h2>Book this room!</h2>
         <TripsContainer />
       </div>
-
     );
   }
 
   render(){
-    const room = this.props.room;
+    const room = this.state.room;
     const showBooking = this.props.currentUser ? this.showBooking() : "";
+
     return(
+      <div>
+        <Header/>
       <div>
         {this.bannerPicture()}
         <div className="show-room-container">
@@ -56,6 +66,7 @@ class ShowRoom extends React.Component {
           <div className="floating-booking">
             { showBooking }
           </div>
+        </div>
         </div>
       </div>
     );

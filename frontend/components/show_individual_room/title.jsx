@@ -1,6 +1,9 @@
 import React from 'react';
 
 class Title extends React.Component{
+  constructor(props) {
+    super(props);
+  }
   render() {
     const room = this.props.room;
     return(
@@ -11,7 +14,6 @@ class Title extends React.Component{
           <h4>With your host, {room.host_name ? room.host_name : "" }</h4>
         </div>
         <div className="show-page-title-right">
-          <img src=""></img>
         </div>
       </div>
     );
@@ -19,3 +21,4 @@ class Title extends React.Component{
 }
 
 export default Title;
+// <img src=""></img>

@@ -79,7 +79,7 @@ class Greeting extends React.Component {
               </li>
               <li>
                 <Link
-                  to={"/"}
+                  to={"/islands"}
                   id="last-item"
                   className="header-button"
                   onClick={resetErrors, logout}>Log out

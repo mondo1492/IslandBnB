@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Modal from 'react-modal';
-// import SessionFormContainer from '../session/session_forms_container';
+import Footer from './front_footer.jsx';
 
 class Front extends React.Component {
   constructor(props) {
     super(props);
+
   }
 
   componentDidMount() {
     document.getElementsByClassName("front-video")[0].play();
   }
-
 
   render() {
     return(
@@ -21,17 +20,16 @@ class Front extends React.Component {
             <source src="http://res.cloudinary.com/dluh2fsyd/video/upload/v1516825950/waves_njc6dg.mp4" type="video/mp4"/>
           </video>
           <div className="front-video-overlay">
-            <div className="overlay-header">
-              <h2>Island BnB</h2>
-            </div>
+            <div className="overlay-header">Island BnB</div>
             <div className="overlay-caption">
-              <h3>Because a real getaway is surrounded by the sea</h3>
+              For those that have relaxation on their mind and the sea in their hearts. Explore the world's islands and choose the unique home that you've been dreaming about.
             </div>
-            <div className="overlay-button">
-              <button>Start your voyage now</button>
-            </div>
+            <Link to='/islands/' className="overlay-button">
+              Start your adventure now
+            </Link>
           </div>
         </div>
+        <Footer/>
       </section>
     );
   }

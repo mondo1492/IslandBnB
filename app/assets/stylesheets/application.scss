@@ -16,6 +16,7 @@
  * {
    font-family: sans-serif;
    outline: none;
+
  }
 
 
@@ -33,6 +34,8 @@
    padding-bottom: 500px;
  }
 
+
+
 @import './components/colors.scss';
 @import './components/header.scss';
 @import './components/modal.scss';
@@ -49,7 +52,8 @@
 @import './components/trips.scss';
 @import './components/listing.scss';
 @import './components/react-dates.scss';
-@import './specific_styling/video.scss'
+@import './specific_styling/video.scss';
+@import './components/footer.scss'
 //
 // body {
 //    min-width:1000px !important;

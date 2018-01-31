@@ -17,30 +17,26 @@ import Front from './front_page/front';
 // <Route exact path="/" component={ TripsContainer } />
 const App = () => (
   <div>
-    <header>
-      <GreetingsContainer/>
-      <LeftLowerNav/>
-    </header>
-    <div id="header-padder"></div>
-    <div id="all-content">
+    <Route exact path="/" component={ Front } />
 
       <Switch>
-        <Route exact path="/" component={  Front } />
+        <Route exact path="/islands" component={ SearchContainer } />
         <Route exact path="/trips" component={  UserTripsContainer } />
         <Route exact path="/rooms/:id" component={ ShowRoomContainer } />
         <ProtectedRoute exact path="/create" component={ CreateRoomContainer }/>
         <ProtectedRoute path="/listings/:id" component={ ListingsContainer }/>
+
       </Switch>
 
-    </div>
+
   </div>
 );
 
 export default App;
-<Route exact path="/" component={  SearchContainer } />
 
-//
-//
-// <Switch>
-// </Switch>
-//       //
+// <header>
+//   <GreetingsContainer/>
+//   <LeftLowerNav/>
+// </header>
+// <div id="header-padder"></div>
+// <div id="all-content"></div>
