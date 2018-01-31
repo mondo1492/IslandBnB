@@ -10,7 +10,7 @@ class Search extends React.Component {
     this.state = {
       bed_params: { min: 0, max: 50},
       price_params: { min: 0, max: 1000000},
-      guest_params: { min: 0, max: 50},
+      guest_params: { min: 1, max: 50},
       home_type: {
         entire_place: false,
         private_room: false,
@@ -22,15 +22,15 @@ class Search extends React.Component {
   render() {
     return(
       <div>
-        {this.searchParameters()}
-        <div className="rooms-map-main-container">
+        <div className='guest-number-button'>
 
-          <MainDisplayContainer />
-          <GoogleMap rooms={this.props.entities}
-            updateRooms={this.updateRooms.bind(this)}
-            bedParams={this.state.bed_params}/>
         </div>
+        <div className='price-button'>
 
+        </div>
+        <div className='home-type'>
+
+        </div>
       </div>
 
     );
