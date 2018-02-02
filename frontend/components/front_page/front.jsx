@@ -10,6 +10,7 @@ class Front extends React.Component {
 
   componentDidMount() {
     document.getElementsByClassName("front-video")[0].play();
+    localStorage.clear();
   }
 
   render() {

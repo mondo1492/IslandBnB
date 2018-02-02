@@ -29,8 +29,36 @@
   border: none;
   outline: none;
   position        : fixed;
-  top             : 160px;
+  top             : 130px;
   left            : 45px;
+  width           : 250px;
+  max-width        : 100%;
+  border-radius    : 6px;
+  padding         : 20px;
+  z-index          : 11;
+}
+
+.modal-guests {
+  background-color: white;
+  border: none;
+  outline: none;
+  position        : fixed;
+  top             : 130px;
+  left            : 200px;
+  width           : 250px;
+  max-width        : 100%;
+  border-radius    : 6px;
+  padding         : 20px;
+  z-index          : 11;
+}
+
+.modal-price {
+  background-color: white;
+  border: none;
+  outline: none;
+  position        : fixed;
+  top             : 130px;
+  left            : 355px;
   width           : 250px;
   max-width        : 100%;
   border-radius    : 6px;

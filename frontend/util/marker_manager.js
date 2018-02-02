@@ -11,6 +11,7 @@ export default class MarkerManager {
   }
 
   updateMarkers(rooms) {
+    console.log(this.markers);
     const roomsObj = {};
 
 
@@ -28,9 +29,51 @@ export default class MarkerManager {
       .forEach((roomId) => this.removeMarker(this.markers[roomId]));
   }
 
+  updateMarkers2(roomId) {
+    let currentMarker = this.markers[roomId];
+    this.removeMarker(this.markers[roomId]);
+    this.createMarkerFromMarker(currentMarker);
+    return currentMarker;
+  }
+
+  updateMarkers3(marker) {
+    this.removeMarker(this.markers[marker.roomId]);
+    this.createMarkerFromMarker2(marker);
+  }
+
+  createMarkerFromMarker2(currentMarker) {
+    console.log(currentMarker.label);
+    const marker = new google.maps.Marker({
+      position: currentMarker.position,
+      map: this.map,
+      label: {text: currentMarker.label.text, color: "black"},
+      icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
+      // animation: google.maps.Animation.DROP,
+      roomId: currentMarker.roomId
+    });
+    this.markers[marker.roomId] = marker;
+  }
+
+  createMarkerFromMarker(currentMarker) {
+    console.log(currentMarker.label);
+    const marker = new google.maps.Marker({
+      position: currentMarker.position,
+      map: this.map,
+      label: {text: currentMarker.label.text, color: "white"},
+      icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
+      // animation: google.maps.Animation.DROP,
+      roomId: currentMarker.roomId
+    });
+    this.markers[marker.roomId] = marker;
+  }
+
   removeMarker(marker) {
     this.markers[marker.roomId].setMap(null);
     delete this.markers[marker.roomId];
+  }
+
+  deleteSpecific(roomId) {
+    delete this.markers[roomId];
   }
 
   createMarkerFromRoom(room, infowindow, handleClick) {
@@ -38,7 +81,7 @@ export default class MarkerManager {
     const marker = new google.maps.Marker({
       position: pos,
       map: this.map,
-      label: `$${room.price}`,
+      label: {text: `$${room.price}`, color: "black"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
       // animation: google.maps.Animation.DROP,
       roomId: room.id
@@ -52,7 +95,7 @@ export default class MarkerManager {
       handleClick(room.id);
     });
     var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
+      `<div id=room-${room.id}>`+
       '</div>'+
       `<img src=${room.pic_url} height="100px" width="150px"></img>` +
       `<h4 id="firstHeading" class="firstHeading">$${room.price} ${room.title}</h4>`+

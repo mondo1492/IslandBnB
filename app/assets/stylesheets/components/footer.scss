@@ -13,28 +13,22 @@
   padding-bottom: 15px;
   border-top: 1px solid lightgrey;
   border-bottom: 1px solid lightgrey;
-
   a {
     color: grey;
     text-decoration: none;
     padding: 5px;
-
   }
-
   .links {
-    // font-style: bolder;
     display: flex;
     flex-direction: row;
     div {
       padding: 15px;
-
     }
     a {
       color: grey;
       text-decoration: none;
       padding: 15px;
     }
-
     :hover {
       cursor: pointer;
       text-decoration: underline;

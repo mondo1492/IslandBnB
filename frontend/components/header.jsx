@@ -12,7 +12,6 @@ class Header extends React.Component {
     return(
       <header>
         <GreetingsContainer/>
-        <LeftLowerNav/>
         <div id="header-padder"></div>
         <div id="all-content"></div>
       </header>

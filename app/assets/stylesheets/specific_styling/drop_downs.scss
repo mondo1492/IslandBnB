@@ -30,8 +30,6 @@
     display: block;
 }
 
-
-
 .dropdown:hover .dropdown-content {
     display: flex;
     align-items: space-between;
@@ -47,8 +45,6 @@
 
   li {
     list-style: none;
-    // padding: 10px;
-
     font-family: sans-serif;
     margin-left: 10px;
     margin-right: 10px;
@@ -65,10 +61,4 @@
 
 .dropdown-content a:hover {
   box-shadow: 0 4px 0px -2px gray;
-  // box-shadow: 0 0 0 2px blue;
-  // border-bottom: 2px solid lightgrey;
 }
-
-// .dropdown:hover .dropbtn {
-//     background-color: #3e8e41;
-// }

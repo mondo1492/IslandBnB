@@ -1,0 +1,54 @@
+<Modal
+    isOpen={this.state.modalOpen}
+    onRequestClose={this.clear}
+    className="modal-beds"
+    overlayClassName="modal-overlay"
+    contentLabel="auth_form">
+    <ReactiveBase app='bnb' credentials='none'>
+      <div className='bed-content'>
+        <NumberBox
+          componentId="NumberBoxSensor"
+          dataField="guests"
+          data={{ label: "Beds", start: 1, end: 50 }}
+          defaultSelected={bedMin}
+          onValueChange={(data)=>{this.updateBed(data);}}
+          />
+        <div className='bed-buttons'>
+          <div className="cancel" onClick={this.clear}>Clear</div>
+          <div className="apply" onClick={this.apply}>Apply</div>
+        </div>
+      </div>
+    </ReactiveBase>
+  </Modal>
+
+
+<Modal
+    isOpen={this.state.modalOpen}
+    onRequestClose={this.clear}
+    className="modal-guests"
+    overlayClassName="modal-overlay"
+    contentLabel="auth_form">
+    <ReactiveBase app='bnb' credentials='none'>
+      <div className='bed-content'>
+        <NumberBox
+          componentId="NumberBoxSensor"
+          dataField="guests"
+          data={{ label: "Guests", start: 1, end: 50 }}
+          defaultSelected={guestMin}
+          onValueChange={(data)=>{this.updateGuest(data);}}
+          />
+        <div className='bed-buttons'>
+          <div className="cancel" onClick={this.clear}>Clear</div>
+          <div className="apply" onClick={this.apply}>Apply</div>
+        </div>
+      </div>
+    </ReactiveBase>
+  </Modal>
+
+  <h2>Max price</h2>
+    <input
+      type="number"
+      onChange={this.updatePrice('max')}
+      placeholder="Any price"
+      min="0"
+    />

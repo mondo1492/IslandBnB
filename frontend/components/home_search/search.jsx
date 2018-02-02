@@ -1,174 +1,305 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 import Header from '../header.jsx';
 import Modal from 'react-modal';
-
+import MarkerManager from '../../util/marker_manager';
 import MainDisplayContainer from '../main_display/main_display_container';
-import GoogleMap from './map';
-import { ReactiveBase, NumberBox } from '@appbaseio/reactivesearch';
+import { Range } from 'rc-slider';
+import { ReactiveBase, NumberBox, RangeSlider } from '@appbaseio/reactivesearch';
 
 class Search extends React.Component {
   constructor(props){
     super(props);
+    const storedBedMin =  parseInt(localStorage.getItem('bed_min'));
+    const storedPriceMin = parseInt(localStorage.getItem('price_min'));
+    const storedPriceMax = parseInt(localStorage.getItem('price_max'));
+    const storedGuestMin = parseInt(localStorage.getItem('guest_min'));
+    console.log(localStorage);
+
     this.state = {
-      bed_params: { min: 1, max: 50},
-      bed_min: 1,
-      price_params: { min: 0, max: 1000000},
-      guest_params: { min: 1, max: 50},
-      modalOpen: false
+      bed_params: { min: storedBedMin ? storedBedMin : 0, max: 50},
+      bed_min: storedBedMin ? storedBedMin : 0,
+      price_params: { min: storedPriceMin ? storedPriceMin : 0, max: 10000},
+      price_min: storedPriceMin ? storedPriceMin : 0,
+      price_max: 10000,
+      guest_params: { min: storedGuestMin ? storedGuestMin : 1, max: 50},
+      guest_min: storedGuestMin ? storedGuestMin : 1,
+      modalOpen1: false,
+      modalOpen2: false,
+      modalOpen3: false,
+      toggler: null,
+      bounds: {
+        northEast: {lat: 37.873972, lng: -122.331297},
+        southWest: {lat: 37.673972, lng: -122.531297}
+      }
     };
     this.clear = this.clear.bind(this);
     this.apply = this.apply.bind(this);
-    this.openModal = this.openModal.bind(this);
+    this.updateRooms = this.updateRooms.bind(this);
+    this.openModal1 = this.openModal1.bind(this);
+    this.openModal2 = this.openModal2.bind(this);
+    this.openModal3 = this.openModal3.bind(this);
   }
 
-  openModal() {
-    this.setState({ modalOpen: true });
+  savePresets() {
+    localStorage.setItem('bed_min', this.state.bed_params.min);
+    localStorage.setItem('price_min', this.state.price_params.min);
+    localStorage.setItem('price_max', this.state.price_params.max);
+    localStorage.setItem('guest_min', this.state.guest_params.min);
+  }
+
+  componentDidMount() {
+    this.updateRooms();
+    const searchMap = this.refs.searchMap;
+    const mapOptions = {
+      center: {lat: 37.773972,
+      lng: -122.431297},
+      zoom: 12,
+      minZoom: 3
+    };
+    this.searchMap = new google.maps.Map(searchMap, mapOptions);
+    const infowindow = new google.maps.InfoWindow();
+    this.MarkerManager = new MarkerManager(this.searchMap, infowindow, this.handleMarkerClick.bind(this));
+
+    this.updateMap = () => {
+      const response = this.searchMap.getBounds().toJSON();
+      console.log('RESPONSE', response);
+      const formattedBounds = {
+        northEast: {lat: response.north, lng: response.east},
+        southWest: {lat: response.south, lng: response.west}
+      };
+      this.setState({bounds: formattedBounds}, () => { this.updateRooms()});
+    };
+
+    google.maps.event.addListener(this.searchMap, 'bounds_changed', this.updateMap);
+
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.MarkerManager.updateMarkers(nextProps.entities);
+  }
+
+  handleMarkerClick(roomid) {
+    this.props.history.push(`/rooms/${roomid}`);
+  }
+
+  openModal1() {
+    this.setState({ modalOpen1: true });
+  }
+  openModal2() {
+    this.setState({ modalOpen2: true });
+  }
+  openModal3() {
+    this.setState({ modalOpen3: true });
   }
 
   clear() {
-    this.setState({ modalOpen: false, bed_min: this.state.bed_params.min });
+    this.setState({
+      modalOpen1: false,
+      modalOpen2: false,
+      modalOpen3: false,
+      bed_min: this.state.bed_params.min,
+      guest_min: this.state.guest_params.min,
+      price_min: this.state.price_params.min,
+      price_max: this.state.price_params.max,
+    });
   }
 
   apply() {
-    this.setState({ modalOpen: false, bed_params: { min: this.state.bed_min} });
-    this.updateRooms()
+    this.setState({
+      modalOpen1: false,
+      modalOpen2: false,
+      modalOpen3: false,
+      bed_params: Object.assign(this.state.bed_params, { min: this.state.bed_min}),
+      guest_params: Object.assign(this.state.guest_params, { min: this.state.guest_min }),
+      price_params: Object.assign(this.state.price_params, { min: this.state.price_min, max: this.state.price_max})
+    });
+    this.updateRooms(this.state.bounds);
   }
 
-  updateRooms(filter) {
+  updateRooms() {
     const beds = this.state.bed_params;
     const prices = this.state.price_params;
     const guest = this.state.guest_params;
-    filter["bed_params"] = { min: beds.min ? beds.min : 1, max: beds.max};
-    filter["price_params"] = { min: prices.min ? prices.min : 0, max: prices.max};
-    filter["guest_params"] = { min: guest.min ? guest.min : 1, max: guest.max};
+    const filter = this.state.bounds;
+    filter["bed_params"] = { min: beds.min, max: beds.max};
+    filter["price_params"] = { min: prices.min, max: prices.max};
+    filter["guest_params"] = { min: guest.min, max: guest.max};
     this.props.getAllRooms(filter);
   }
 
-  updateBed(field) {
-    console.log(field);
-    return e => {
-      this.setState({
-        bed_params: Object.assign(this.state.bed_params, { [field]: e.currentTarget.value})
-     });
-   };
+  updatePrice(price) {
+    return this.setState({ price_min: price[0], price_max: price[1]});
   }
 
-  updatePrice(field) {
-    return e => {
-      this.setState({
-        price_params: Object.assign(this.state.bed_params, { [field]: e.currentTarget.value})
-     });
-   };
-  }
-  updateGuest(field) {
-    return e => {
-      this.setState({
-        guest_params: Object.assign(this.state.bed_params, { [field]: e.currentTarget.value})
-     });
-   };
+  updateGuest(min_guests) {
+    return this.setState({ guest_min: min_guests });
   }
 
-  // updateBedTwo(mint) {
-  //   return this.setState({
-  //       bed_params: Object.assign(this.state.bed_params, { min: mint})
-  //    });
-  // }
-
-  updateBedTwo(mint) {
-    return this.setState({
-        bed_min: mint
-     });
+  updateBed(min_beds) {
+    return this.setState({ bed_min: min_beds });
   }
+
+  toggleSelected(item) {
+    if (this.state.toggler !== null) {
+      if (this.state.toggler.roomId !== item.dataset.room) {
+        this.MarkerManager.updateMarkers3(this.state.toggler);
+        let currentMarker = this.MarkerManager.updateMarkers2(item.dataset.room);
+        this.setState({toggler: currentMarker});
+      }
+    } else {
+      let currentMarker = this.MarkerManager.updateMarkers2(item.dataset.room);
+      this.setState({toggler: currentMarker});
+      // console.log(this.state.toggler.roomId);
+    }
+
+  }
+
+  componentWillUpdate() {
+    let ul = document.getElementById('room-li');
+    let items = ul.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].dataset.listeneradded === 'false') {
+        items[i].addEventListener('mouseenter', () => this.toggleSelected(items[i]));
+        items[i].dataset.listeneradded = true;
+      } else {
+        items[i].removeEventListener('mouseenter', () => this.toggleSelected(items[i]));
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.savePresets();
+  }
+
+  priceDisplay() {
+      if (this.state.price_min === 0 && this.state.price_max < 10000) {
+        return `Up to ${this.state.price_max}`;
+      } else if (this.state.price_min > 0 && this.state.price_max < 10000) {
+        return `$${this.state.price_min} - $${this.state.price_max}`;
+      } else if (this.state.price_min > 0 && this.state.price_max === 10000) {
+        return `$${this.state.price_min}+`;
+      } else {
+        return `Price`;
+      }
+    }
+
   searchParameters() {
     const bedMin = this.state.bed_min;
-    console.log(bedMin);
+    const guestMin = this.state.guest_min;
+    const priceMin = this.state.price_min;
+    const priceMax = this.state.price_max;
     return(
       <div>
-        <Header/>
-
       <div className="search-params-container">
         <ul>
           <li>
-            <button className="link" onClick={this.openModal}>
-              {bedMin} {bedMin === 1 ? 'Bed' : 'Beds'}
+            <button className="link" onClick={this.openModal1}>
+              {`${bedMin}+`} {bedMin === 1 ? 'Bed' : 'Beds'}
             </button>
             <Modal
-                isOpen={this.state.modalOpen}
+                isOpen={this.state.modalOpen1}
                 onRequestClose={this.clear}
                 className="modal-beds"
                 overlayClassName="modal-overlay"
                 contentLabel="auth_form">
                 <ReactiveBase app='bnb' credentials='none'>
-                <div className='bed-content'>
+                  <div className='bed-content'>
                     <NumberBox
                       componentId="NumberBoxSensor"
                       dataField="guests"
-                      data={{ label: "Beds", start: 1, end: 50 }}
+                      data={{ label: "Beds", start: 0, end: 50 }}
                       defaultSelected={bedMin}
-                      onValueChange={(data)=>{this.updateBedTwo(data);}}
+                      onValueChange={(data)=>{this.updateBed(data);}}
                       />
                     <div className='bed-buttons'>
                       <div className="cancel" onClick={this.clear}>Clear</div>
                       <div className="apply" onClick={this.apply}>Apply</div>
                     </div>
-                    </div>
-                    </ReactiveBase>
+                  </div>
+                </ReactiveBase>
               </Modal>
-
-
-
           </li>
           <li>
-            <h2>Number of guests allowed</h2>
-            <input
-              type="number"
-              onChange={this.updateGuest('max')}
-              placeholder="Any number of guests"
-              min="1"
-            />
+            <button className="link" onClick={this.openModal2}>
+              {guestMin} {guestMin === 1 ? 'Guest' : 'Guests'}
+            </button>
+            <Modal
+                isOpen={this.state.modalOpen2}
+                onRequestClose={this.clear}
+                className="modal-guests"
+                overlayClassName="modal-overlay"
+                contentLabel="auth_form">
+                <ReactiveBase app='bnb' credentials='none'>
+                  <div className='bed-content'>
+                    <NumberBox
+                      componentId="NumberBoxSensor"
+                      dataField="guests"
+                      data={{ label: "Guests", start: 1, end: 50 }}
+                      defaultSelected={guestMin}
+                      onValueChange={(data)=>{this.updateGuest(data);}}
+                      />
+                    <div className='bed-buttons'>
+                      <div className="cancel" onClick={this.clear}>Clear</div>
+                      <div className="apply" onClick={this.apply}>Apply</div>
+                    </div>
+                  </div>
+                </ReactiveBase>
+              </Modal>
           </li>
           <li>
-            <h2>Max price</h2>
-              <input
-                type="number"
-                onChange={this.updatePrice('max')}
-                placeholder="Any price"
-                min="0"
-              />
+            <button className="link" onClick={this.openModal3}>
+              {this.priceDisplay()}
+            </button>
+            <Modal
+                isOpen={this.state.modalOpen3}
+                onRequestClose={this.clear}
+                className="modal-price"
+                overlayClassName="modal-overlay">
+                  <div>
+                    {`$${priceMin} - $${priceMax === 10000 ? `10000+` : priceMax}`}
+                  </div>
+                  <div className='bed-content'>
+                  <Range
+                    min={0}
+                    max={10000}
+                    defaultValue={[priceMin, priceMax]}
+                    tipFormatter={ value => `$${value}`}
+                    onChange={(value)=>{this.updatePrice(value)}}
+                  />
+                  <div className='bed-buttons'>
+                    <div className="cancel" onClick={this.clear}>Clear</div>
+                    <div className="apply" onClick={this.apply}>Apply</div>
+                  </div>
+                </div>
+
+              </Modal>
           </li>
         </ul>
-        <button id="change-bed-number">Update map!</button>
       </div>
 
       </div>
     );
   }
-  // <input
-  //   type="number"
-  //   onChange={this.updateBed('min')}
-  //   placeholder="Any number of beds"
-  //   min="1"
-  // />
 
-  render() {
-    console.log(this.state);
-    return(
-      <div>
-        {this.searchParameters()}
-        <div className="rooms-map-main-container">
-
-          <MainDisplayContainer />
-          <GoogleMap rooms={this.props.entities}
-            updateRooms={this.updateRooms.bind(this)}
-            bedParams={this.state.bed_params}/>
-        </div>
-
+render() {
+  console.log(this.state);
+  return(
+    <div>
+      <Header/>
+      {this.searchParameters()}
+      <div className='rooms-map-main-container'>
+        <MainDisplayContainer />
+          <div className="searchMap-container">
+              <div className="searchMap" ref="searchMap"> Map </div>
+          </div>
       </div>
-
-    );
-  }
+    </div>
+  );
 }
-
-//
+}
 
 export default Search;

@@ -19,11 +19,9 @@
 
  }
 
-
-
  #all-content {
    margin: 0;
-   pading: 0;
+   padding: 0;
    position: relative;
    z-index:50;
  }
@@ -34,7 +32,9 @@
    padding-bottom: 500px;
  }
 
-
+.firstHeading {
+  font-size: 90px;
+}
 
 @import './components/colors.scss';
 @import './components/header.scss';
@@ -55,11 +55,4 @@
 @import './specific_styling/video.scss';
 @import './components/footer.scss';
 @import './components/filters.scss';
-//
-// body {
-//    min-width:1000px !important;
-//    width: auto !important;
-//    width: 500px;
-//
-//
-// }
+@import 'rc-slider/assets/index.css';

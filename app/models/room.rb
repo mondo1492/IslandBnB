@@ -18,8 +18,9 @@ class Room < ApplicationRecord
         .where("lng > ?", bounds[:southWest][:lng])
         .where("lng < ?", bounds[:northEast][:lng])
         .where("beds >= ?", bounds[:bed_params][:min])
+        .where("price >= ?", bounds[:price_params][:min])
         .where("price <= ?", bounds[:price_params][:max])
-        .where("num_guests <= ?", bounds[:guest_params][:max])
+        .where("num_guests >= ?", bounds[:guest_params][:min])
   end
 
   def host_name
