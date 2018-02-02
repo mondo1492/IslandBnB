@@ -15,7 +15,6 @@ class Search extends React.Component {
     const storedPriceMin = parseInt(localStorage.getItem('price_min'));
     const storedPriceMax = parseInt(localStorage.getItem('price_max'));
     const storedGuestMin = parseInt(localStorage.getItem('guest_min'));
-    console.log(localStorage);
 
     this.state = {
       bed_params: { min: storedBedMin ? storedBedMin : 0, max: 50},
@@ -50,6 +49,7 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
+    console.log("MOUNTED");
     this.updateRooms();
     const searchMap = this.refs.searchMap;
     const mapOptions = {
@@ -64,17 +64,13 @@ class Search extends React.Component {
 
     this.updateMap = () => {
       const response = this.searchMap.getBounds().toJSON();
-      console.log('RESPONSE', response);
       const formattedBounds = {
         northEast: {lat: response.north, lng: response.east},
         southWest: {lat: response.south, lng: response.west}
       };
       this.setState({bounds: formattedBounds}, () => { this.updateRooms()});
     };
-
     google.maps.event.addListener(this.searchMap, 'bounds_changed', this.updateMap);
-
-
   }
 
   componentWillReceiveProps(nextProps) {
@@ -127,7 +123,7 @@ class Search extends React.Component {
     filter["bed_params"] = { min: beds.min, max: beds.max};
     filter["price_params"] = { min: prices.min, max: prices.max};
     filter["guest_params"] = { min: guest.min, max: guest.max};
-    this.props.getAllRooms(filter);
+    this.props.getAllRooms(filter).then(()=>{this.addListeners();});
   }
 
   updatePrice(price) {
@@ -152,24 +148,35 @@ class Search extends React.Component {
     } else {
       let currentMarker = this.MarkerManager.updateMarkers2(item.dataset.room);
       this.setState({toggler: currentMarker});
-      // console.log(this.state.toggler.roomId);
     }
-
   }
 
-  componentWillUpdate() {
+  untoggleSelected() {
+    this.MarkerManager.updateMarkers3(this.state.toggler);
+    this.setState({toggler: null});
+  }
+
+  addListeners() {
     let ul = document.getElementById('room-li');
     let items = ul.getElementsByTagName('li');
 
     for (let i = 0; i < items.length; i++) {
       if (items[i].dataset.listeneradded === 'false') {
         items[i].addEventListener('mouseenter', () => this.toggleSelected(items[i]));
+        items[i].addEventListener('mouseleave', () => this.untoggleSelected(items[i]));
         items[i].dataset.listeneradded = true;
       } else {
+        items[i].removeEventListener('mouseleave', () => this.untoggleSelected(items[i]));
         items[i].removeEventListener('mouseenter', () => this.toggleSelected(items[i]));
       }
     }
   }
+
+  componentWillUpdate() {
+    console.log("UPDATEEEED");
+    this.addListeners();
+  }
+
 
   componentWillUnmount() {
     this.savePresets();
@@ -177,7 +184,7 @@ class Search extends React.Component {
 
   priceDisplay() {
       if (this.state.price_min === 0 && this.state.price_max < 10000) {
-        return `Up to ${this.state.price_max}`;
+        return `Up to $${this.state.price_max}`;
       } else if (this.state.price_min > 0 && this.state.price_max < 10000) {
         return `$${this.state.price_min} - $${this.state.price_max}`;
       } else if (this.state.price_min > 0 && this.state.price_max === 10000) {
@@ -286,7 +293,6 @@ class Search extends React.Component {
   }
 
 render() {
-  console.log(this.state);
   return(
     <div>
       <Header/>

@@ -37,8 +37,10 @@ export default class MarkerManager {
   }
 
   updateMarkers3(marker) {
-    this.removeMarker(this.markers[marker.roomId]);
-    this.createMarkerFromMarker2(marker);
+    if (this.markers[marker.roomId]) {
+      this.removeMarker(marker);
+      this.createMarkerFromMarker2(marker);
+    }
   }
 
   createMarkerFromMarker2(currentMarker) {
@@ -68,8 +70,8 @@ export default class MarkerManager {
   }
 
   removeMarker(marker) {
-    this.markers[marker.roomId].setMap(null);
-    delete this.markers[marker.roomId];
+      this.markers[marker.roomId].setMap(null);
+      delete this.markers[marker.roomId];
   }
 
   deleteSpecific(roomId) {
