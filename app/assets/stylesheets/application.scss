@@ -16,7 +16,6 @@
  * {
    font-family: sans-serif;
    outline: none;
-
  }
 
  #all-content {
@@ -32,9 +31,6 @@
    padding-bottom: 500px;
  }
 
-.firstHeading {
-  font-size: 90px;
-}
 
 @import './components/colors.scss';
 @import './components/header.scss';
@@ -56,3 +52,6 @@
 @import './components/footer.scss';
 @import './components/filters.scss';
 @import 'rc-slider/assets/index.css';
+@import './specific_styling/google_search_box.scss';
+@import './specific_styling/rc_slider.scss';
+@import './specific_styling/gmap_infowindow.scss';

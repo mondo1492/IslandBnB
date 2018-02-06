@@ -10,8 +10,11 @@ class Booking extends React.Component {
       booking: {
         num_guests: "",
         total_cost: ""
-      }
+      },
+      pricePerNight: this.props.room.price,
     };
+    console.log("BOOOOOOKINNNNGGG", this.state);
+    console.log("BOOOOOOKINNNNGGG", this.props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateCost = this.updateCost.bind(this);
   }
@@ -125,15 +128,47 @@ class Booking extends React.Component {
     );
   }
 
+
+  handleButtonClick() {
+    $(document).ready( () => {
+      let unclicked = $('.DateInput');
+      let unclicked2 = $('.DateInput__display-text');
+      console.log(unclicked);
+      unclicked.removeClass('DateInput--open-down');
+      unclicked.addClass('DateInput--with-caret DateInput--open-down');
+      unclicked2.removeClass('DateInput__display-text');
+      unclicked2.addClass('DateInput__display-text--focused');
+      console.log("HANDLING THIS CLICK");
+    });
+
+  }
+
   calculate(displayCost) {
     const bool2 = this.state.booking.num_guests && this.state.endDate && this.state.startDate;
     const showError = this.clientSideCheck() ?   this.showBookingError() : "";
     const showErrorDisplay = (this.state.endDate && this.state.startDate) ? showError : "";
     const show = (bool2 && !this.clientSideCheck()) ? this.showButton(displayCost) : "";
     const blockedDates = this.state.blockout_dates;
+    // console.log("CLICKER", clickker);
     return(
       <div className="guest-booking">
         <div>
+          <div id='booking-item-1'>
+            <div>${this.props.room.price}</div>
+            <div> per night</div>
+          </div>
+          <div id='booking-item-2'>
+            <h5>Dates</h5>
+            <DateRangePicker
+                  startDate={ this.state.startDate }
+                  endDate={ this.state.endDate }
+                  numberOfMonths={1}
+                  onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate, blockout_dates: blockedDates })}
+                  focusedInput={ this.state.focusedInput }
+                  onFocusChange={ focusedInput => this.setState({ focusedInput }) }
+                  isDayBlocked={ (day) => blockedDates.includes(""+ day['_d']+"")}
+              />
+          </div>
           <h2>Guests</h2>
           <input
             type="number"
@@ -143,17 +178,7 @@ class Booking extends React.Component {
             min={1}
           />
         </div>
-        <div>
-          <h2>Dates</h2>
-          <DateRangePicker
-                startDate={ this.state.startDate }
-                endDate={ this.state.endDate }
-                onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate, blockout_dates: blockedDates })}
-                focusedInput={ this.state.focusedInput }
-                onFocusChange={ focusedInput => this.setState({ focusedInput }) }
-                isDayBlocked={ (day) => blockedDates.includes(""+ day['_d']+"")}
-            />
-        </div>
+        <button onClick={this.handleButtonClick}>BUTTONNNN</button>
         {show}
         {showErrorDisplay}
       </div>
@@ -174,27 +199,6 @@ class Booking extends React.Component {
     );
   }
 
- //
- //  addDays(days) {
- //    let dat = new Date(this.valueOf("2010-01-14"));
- //    dat.setDate(dat.getDate() + days);
- //    return dat;
- //  }
- //
- //  getDates(startDate, stopDate) {
- //    var dateArray = new Array();
- //    var currentDate = new Date(currentDate);
- //    while (currentDate <= stopDate) {
- //      dateArray.push(currentDate);
- //      currentDate = currentDate.addDays(1);
- //    }
- //   return dateArray;
- // }
- //
-
-
-
-
   render() {
     let displayCost = 0;
     if (this.state.startDate && this.state.endDate) {
@@ -204,10 +208,12 @@ class Booking extends React.Component {
     const display = this.state.booking.total_cost ? this.book(displayCost) : this.calculate(displayCost);
     return(
       <div className="booking">
+
+
         {display}
       </div>
     );
   }
 }
-// "Wed Aug 30 2017 00:00:00 GMT-0700 (PDT)"].includes(day.d)
+
 export default Booking;

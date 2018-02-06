@@ -21,3 +21,32 @@
 .apply {
   color: #008489;
 }
+
+
+.filter-button, .filter-button-selected {
+  color: $bnb-darker-grey;
+  cursor: pointer;
+  background-color: white;
+  font-size: 15px;
+  line-height: 18px;
+  padding-top: 6px;
+  letter-spacing: 0.2px;
+  padding-bottom: 6px;
+  border: 1px solid $bnb-light-grey;
+  border-radius: 4px;
+}
+
+.filter-button-selected {
+  color: white;
+  border: 1px solid $bnb-green;
+  background-color: $bnb-green;
+}
+
+.filter-button:hover {
+  background-color: $bnb-light-grey;
+}
+
+.filter-button-text {
+  padding-left: 10px;
+  padding-right: 10px;
+}

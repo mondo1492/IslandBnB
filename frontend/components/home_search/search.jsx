@@ -7,6 +7,9 @@ import MarkerManager from '../../util/marker_manager';
 import MainDisplayContainer from '../main_display/main_display_container';
 import { Range } from 'rc-slider';
 import { ReactiveBase, NumberBox, RangeSlider } from '@appbaseio/reactivesearch';
+import ReactDOMServer from 'react-dom/server';
+
+const STYLING = require('./gmap_style.jsx');
 
 class Search extends React.Component {
   constructor(props){
@@ -39,6 +42,7 @@ class Search extends React.Component {
     this.openModal1 = this.openModal1.bind(this);
     this.openModal2 = this.openModal2.bind(this);
     this.openModal3 = this.openModal3.bind(this);
+    this.resetFilters = this.resetFilters.bind(this);
   }
 
   savePresets() {
@@ -49,18 +53,28 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    console.log("MOUNTED");
     this.updateRooms();
     const searchMap = this.refs.searchMap;
     const mapOptions = {
-      center: {lat: 37.773972,
-      lng: -122.431297},
-      zoom: 12,
-      minZoom: 3
+      center: {lat: 0,
+      lng: -20},
+      zoom: 2,
+      minZoom: 2,
+      styles: STYLING.GMAPSTYLE
     };
     this.searchMap = new google.maps.Map(searchMap, mapOptions);
-    const infowindow = new google.maps.InfoWindow();
+    const infowindow = new google.maps.InfoWindow({
+      maxWidth: 300,
+      pixelOffset: new google.maps.Size(0, -12)
+    });
+
+    google.maps.event.addListener(infowindow, 'domready', function () {
+       $('#main-infoWindow').closest('.gm-style-iw').parent().addClass('custom-iw');
+     });
+
     this.MarkerManager = new MarkerManager(this.searchMap, infowindow, this.handleMarkerClick.bind(this));
+
+    let input = document.getElementById('searchTextFieldHome');
 
     this.updateMap = () => {
       const response = this.searchMap.getBounds().toJSON();
@@ -70,6 +84,22 @@ class Search extends React.Component {
       };
       this.setState({bounds: formattedBounds}, () => { this.updateRooms()});
     };
+
+    const defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(0, 0),
+      new google.maps.LatLng(0, 0)
+    );
+    let searchOptions = {
+      bounds: defaultBounds,
+      radius: '20000',
+      types: ['(regions)']
+    };
+
+    let autocomplete = new google.maps.places.Autocomplete(input, searchOptions);
+    google.maps.event.addListener(autocomplete, 'place_changed', () => {
+      this.searchMap.setCenter(autocomplete.getPlace().geometry.location);
+      this.searchMap.setZoom(9);
+    });
     google.maps.event.addListener(this.searchMap, 'bounds_changed', this.updateMap);
   }
 
@@ -78,8 +108,10 @@ class Search extends React.Component {
   }
 
   handleMarkerClick(roomid) {
+    console.log(roomid);
     this.props.history.push(`/rooms/${roomid}`);
   }
+
 
   openModal1() {
     this.setState({ modalOpen1: true });
@@ -160,6 +192,7 @@ class Search extends React.Component {
     let ul = document.getElementById('room-li');
     let items = ul.getElementsByTagName('li');
 
+
     for (let i = 0; i < items.length; i++) {
       if (items[i].dataset.listeneradded === 'false') {
         items[i].addEventListener('mouseenter', () => this.toggleSelected(items[i]));
@@ -173,13 +206,13 @@ class Search extends React.Component {
   }
 
   componentWillUpdate() {
-    console.log("UPDATEEEED");
     this.addListeners();
   }
 
 
   componentWillUnmount() {
     this.savePresets();
+    console.log("UNMOUNTED");
   }
 
   priceDisplay() {
@@ -204,8 +237,10 @@ class Search extends React.Component {
       <div className="search-params-container">
         <ul>
           <li>
-            <button className="link" onClick={this.openModal1}>
-              {`${bedMin}+`} {bedMin === 1 ? 'Bed' : 'Beds'}
+            <button className={ bedMin === 0 ? "filter-button" : "filter-button-selected"} onClick={this.openModal1}>
+              <div className="filter-button-text">
+                {`${bedMin}+`} {bedMin === 1 ? 'Bed' : 'Beds'}
+              </div>
             </button>
             <Modal
                 isOpen={this.state.modalOpen1}
@@ -231,8 +266,10 @@ class Search extends React.Component {
               </Modal>
           </li>
           <li>
-            <button className="link" onClick={this.openModal2}>
-              {guestMin} {guestMin === 1 ? 'Guest' : 'Guests'}
+            <button className={ guestMin === 1 ? "filter-button" : "filter-button-selected"} onClick={this.openModal2}>
+              <div className="filter-button-text">
+                {guestMin} {guestMin === 1 ? 'Guest' : 'Guests'}
+              </div>
             </button>
             <Modal
                 isOpen={this.state.modalOpen2}
@@ -258,21 +295,24 @@ class Search extends React.Component {
               </Modal>
           </li>
           <li>
-            <button className="link" onClick={this.openModal3}>
-              {this.priceDisplay()}
+            <button className={ (priceMin === 0 && priceMax === 10000) ? "filter-button" : "filter-button-selected"} onClick={this.openModal3}>
+              <div className="filter-button-text">
+                {this.priceDisplay()}
+              </div>
             </button>
             <Modal
                 isOpen={this.state.modalOpen3}
                 onRequestClose={this.clear}
                 className="modal-price"
                 overlayClassName="modal-overlay">
-                  <div>
+                  <div className='modal-price-display'>
                     {`$${priceMin} - $${priceMax === 10000 ? `10000+` : priceMax}`}
                   </div>
                   <div className='bed-content'>
                   <Range
                     min={0}
                     max={10000}
+                    className='range-slider'
                     defaultValue={[priceMin, priceMax]}
                     tipFormatter={ value => `$${value}`}
                     onChange={(value)=>{this.updatePrice(value)}}
@@ -282,15 +322,23 @@ class Search extends React.Component {
                     <div className="apply" onClick={this.apply}>Apply</div>
                   </div>
                 </div>
-
               </Modal>
           </li>
         </ul>
       </div>
-
       </div>
     );
   }
+resetFilters() {
+  this.setState({
+    price_min: 0,
+    price_max: 10000,
+    bed_min: 0,
+    guest_min: 1
+  });
+}
+
+
 
 render() {
   return(
@@ -298,7 +346,7 @@ render() {
       <Header/>
       {this.searchParameters()}
       <div className='rooms-map-main-container'>
-        <MainDisplayContainer />
+        <MainDisplayContainer resetFilters={this.resetFilters} />
           <div className="searchMap-container">
               <div className="searchMap" ref="searchMap"> Map </div>
           </div>

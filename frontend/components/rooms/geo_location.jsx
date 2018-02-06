@@ -45,6 +45,7 @@ class GeoLocation extends React.Component {
         center: pos, // this is area 51
         zoom: 14
       };
+      
       const mapRerender = new google.maps.Map(map, mapOptions);
       self.props.updateGeoLocation({
         lat: place.geometry.viewport["f"]["b"],

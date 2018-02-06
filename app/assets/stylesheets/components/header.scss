@@ -1,6 +1,7 @@
 header {
   width: 100%;
   height: 100%;
+
 }
 
 body {
@@ -9,7 +10,6 @@ body {
 
 .header {
    position: fixed;
-   background-color: white;
    z-index: 10000;
    background: white;
    display: flex;
@@ -17,7 +17,9 @@ body {
    align-items: flex-start;
    width: 100%;
    height: 80px;
-   box-shadow: 0 0 2px 0px gray;
+   background: linear-gradient($background, white);
+   border-bottom: 1px solid lightgrey;
+   // background-color: $background;
 }
 
 .left-header-group {
@@ -25,7 +27,7 @@ body {
    flex-direction: row;
    justify-content: center;
    padding-left: 18px;
-   height: 50px;
+   height: 100%;
 }
 
 .right-header-group > nav {
@@ -67,13 +69,27 @@ body {
   }
   input {
     width: 100%;
-    padding: 20px 30px;
+    padding: 14px 48px;
     margin: 18px 0px;
     box-sizing: border-box;
     font-size: 14px;
     border: none;
     border: 2px solid lightgrey;
     border-radius: 3px;
+  }
+  input::placeholder {
+    opacity: 0.8;
+  }
+  .magnifying-glass {
+    fill: #484848;
+    height: 30px;
+    width: 30px;
+    left: 130px;
+    position: absolute;
+    padding-top: 9px;
+    margin: 18px 0px;
+    opacity: 0.8;
+    // box-sizing: border-box;
   }
   h2 {
     padding: 5px;

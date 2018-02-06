@@ -6,11 +6,13 @@
   align-items: center;
   width: 100%;
   top: 80px;
-  box-shadow: 0 0 2px 0px gray;
+  background-color: white;
+  border-top: 1px solid $bnb-light-grey;
+  border-bottom: 1px solid $bnb-light-grey;
   padding: none;
   margin: none;
   height: 60px;
-  background-color: white;
+  z-index: 2;
   ul {
     display: flex;
     flex-direction: row;
@@ -18,23 +20,11 @@
     justify-content: center;
     align-items: center;
     li {
-      padding-left: 5px;
-      min-width: 150px;
+      padding-left: 15px;
+      // min-width: 150px;
       h2 {
         font-size: 10px;
       }
     }
-  }
-  button {
-    cursor: pointer;
-    background-color: $light-blue-grey;
-    font-size: 15px;
-    width: 150px;
-    height: 30px;
-    border:none;
-    border-radius: 5px;
-  }
-  button:hover {
-    opacity: .6;
   }
 }

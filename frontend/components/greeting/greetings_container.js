@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import Greeting from './greeting';
 import { receiveErrors } from '../../actions/session_actions';
 import { logout } from '../../actions/session_actions';
+import { withRouter } from 'react-router-dom';
+
 
 const mapStateToProps = ({ session }) => ({
   currentUser: session.currentUser,
@@ -13,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
   resetErrors: () => dispatch(receiveErrors([]))
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Greeting);
+)(Greeting));

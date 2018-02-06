@@ -13,19 +13,76 @@ class ShowRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      room: this.props.room
-    };
+      alternate: false,
+      positionFromTop: 0
+    }
   }
 
+  // componentWillMount(){
+  //   $(document).ready( () => {
+  //   this.setState({positionFromTop: $(".sticker").position().top});
+  // });
+  // }
+
   componentDidMount() {
+    // this.setState({positionTop: })
+  //     let s = $(".sticker");
+  //     $(window).scroll(() => {
+  //         let windowpos = $(window).scrollTop();
+  //         // console.log("Distance from top:" + pos.top);
+  //         // console.log("Scroll Position" + windowpos);
+  //         // s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
+  //         if ((windowpos + 80) >= this.state.positionFromTop) {
+  //             s.addClass("stick");
+  //             this.setState({alternate: true});
+  //         } else {
+  //             s.removeClass("stick");
+  //             this.setState({alternate: false});
+  //
+  //         }
+  // });
+
+    window.addEventListener('resize', () => {
+      let s = $("#floating-booking");
+      let y = $("#floating-booking-placeholder");
+      let pos = s.position();
+      let pos2 = y.position();
+      this.setState({positionFromTop: pos2 ? pos2.top : pos.top });
+    });
+
+    $(document).ready( () => {
+      let s = $(".sticker");
+      let pos = s.position();
+      this.setState({positionFromTop: pos.top }, ()=> {
+        $(window).scroll(() => {
+            let windowpos = $(window).scrollTop();
+            if ((windowpos + 80) >= this.state.positionFromTop) {
+                s.addClass("stick");
+                this.setState({alternate: true});
+            } else {
+                s.removeClass("stick");
+                this.setState({alternate: false});
+            }
+        });
+      });
+    });
+  }
+
+  componentWillMount() {
     this.props.showRoom(this.props.match.params.id);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      this.props.showRoom(this.props.match.params.id);
+    }
   }
 
   bannerPicture() {
     const bannerPictureStyle = {
       height: "100%",
       width: "100%",
-      backgroundImage: `url(${this.state.room.pic_url})`
+      backgroundImage: `url(${this.props.room.pic_url})`
     };
     return(
       <div className="show-page-picture"
@@ -36,17 +93,31 @@ class ShowRoom extends React.Component {
 
   showBooking() {
     return(
-      <div>
-        <h2>Book this room!</h2>
+      <div className='booking-item'>
         <TripsContainer />
       </div>
     );
   }
 
   render(){
-    const room = this.state.room;
+    // console.log();
+    const room = this.props.room;
     const showBooking = this.props.currentUser ? this.showBooking() : "";
 
+
+
+//
+// <div id="wrapper">
+//   <div id="mainContent">
+//     <!--Content for your main div - like a blog post-->
+//   </div>
+//   <div id="sideBar">
+//     <!--Some content in your right column/sidebar-->
+//     <div id="sticker">...start scrolling to watch me stick</div>
+//   </div>
+//   <div class="clear"></div>
+// </div>
+    let alternate = this.state.alternate;
     return(
       <div>
         <Header/>
@@ -54,17 +125,22 @@ class ShowRoom extends React.Component {
         {this.bannerPicture()}
         <div className="show-room-container">
           <div className="show-main-content">
-
-            <Title room={room}  />
-            <Features room={room} />
-            <Description room={room} />
-            <MoreDetails room={room} />
-            <a href="reviews"></a>
-            <ReviewsContainer />
-            <a href="#host"></a>
-          </div>
-          <div className="floating-booking">
-            { showBooking }
+            <div className='room-details'>
+              <Title room={room}  />
+              <Features room={room} />
+              <Description room={room} />
+              <MoreDetails room={room} />
+              <a href="reviews"></a>
+              <ReviewsContainer />
+              <a href="#host"></a>
+            </div>
+            <div id="floating-booking" className='sticker'>
+              { showBooking }
+            </div>
+            { alternate === true ?
+              <div id="floating-booking-placeholder">
+              </div> : ""
+            }
           </div>
         </div>
         </div>

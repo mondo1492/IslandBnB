@@ -16,7 +16,7 @@
       div {
         z-index: -500;
         div {
-          z-index: -500;
+          z-index: 1;
         }
         span {
           z-index: -1;
@@ -38,4 +38,16 @@
       cursor: default !important;
     }
   }
+}
+
+.react-stars-half::before {
+  position: absolute;
+  overflow: hidden;
+  display: block;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 50%;
+  content: attr(data-forhalf);
+  color: #00BEC5;
 }

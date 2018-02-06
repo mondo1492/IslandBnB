@@ -1,0 +1,262 @@
+html, body, #map-canvas {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+.custom-iw .gm-style-iw {
+    top:15px !important;
+    left:0 !important;
+    border-radius:2px;
+}
+.custom-iw>div:first-child>div:nth-child(2) {
+    display:none;
+}
+.custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+    width:100% !important;
+    max-width:100% !important;
+}
+/** set here the width **/
+.custom-iw, .custom-iw>div:first-child>div:last-child {
+    width:342px !important;
+}
+.custom-iw>div:first-child>div:last-child {
+    left:0 !important;
+    top:0px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px;
+    z-index:-1 !important;
+}
+/** set here the desired background-color **/
+#main-infoWindow, .custom-iw>div:first-child>div:nth-child(n-1)>div>div, .custom-iw>div>div:last-child, .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+  // position: fixed;
+  // top: 30px;
+  // list-style-position: inside;
+  // height: 352px;
+    // background-color:orange !important;
+}
+/** close-button **/
+.custom-iw>div:last-child {
+    top:1px !important;
+    right:0 !important;
+}
+/** padding of the content **/
+#main-infoWindow {
+    // padding:6px;
+}
+
+.custom-iw {
+  // top: inherit;
+  // top: calc(inherit + 100px) !important;
+}
+
+.info-window-description-rating {
+  display: flex;
+}
+
+.info-window-description {
+  padding-left: 14px;
+  padding-top: 5px;
+
+  div {
+    padding-bottom: 4px;
+  }
+}
+
+.custom-iw>div:first-child {
+    top: 15px !important;
+    right: 0 !important;
+}
+
+
+// // #map-canvas {
+// // 	margin: 0;
+// // 	padding: 0;
+// // 	height: 400px;
+// // 	max-width: none;
+// // }
+// // #map-canvas img {
+// // 	max-width: none !important;
+// // }
+// // .gm-style-iw {
+// // 	width: 350px !important;
+// // 	top: 15px !important;
+// // 	left: 0px !important;
+// // 	background-color: #fff;
+// // 	box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+// // 	border: 1px solid rgba(72, 181, 233, 0.6);
+// // 	border-radius: 2px 2px 10px 10px;
+// // }
+// // #iw-container {
+// // 	margin-bottom: 10px;
+// // }
+// // #iw-container .iw-title {
+// // 	font-family: 'Open Sans Condensed', sans-serif;
+// // 	font-size: 22px;
+// // 	font-weight: 400;
+// // 	padding: 10px;
+// // 	background-color: #48b5e9;
+// // 	color: white;
+// // 	margin: 0;
+// // 	border-radius: 2px 2px 0 0;
+// // }
+// // #iw-container .iw-content {
+// // 	font-size: 13px;
+// // 	line-height: 18px;
+// // 	font-weight: 400;
+// // 	margin-right: 1px;
+// // 	padding: 15px 5px 20px 15px;
+// // 	max-height: 140px;
+// // 	overflow-y: auto;
+// // 	overflow-x: hidden;
+// // }
+// // .iw-content img {
+// // 	float: right;
+// // 	margin: 0 5px 5px 10px;
+// // }
+// // .iw-subTitle {
+// // 	font-size: 16px;
+// // 	font-weight: 700;
+// // 	padding: 5px 0;
+// // }
+// // .iw-bottom-gradient {
+// // 	position: absolute;
+// // 	width: 326px;
+// // 	height: 25px;
+// // 	bottom: 10px;
+// // 	right: 18px;
+// // 	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+// // 	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+// // 	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+// // 	background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+// // }
+// //
+// //
+// //
+// //
+// //
+//
+//
+//
+//
+//
+//
+//
+// html, body, #map-canvas {
+//     height: 100%;
+//     margin: 0px;
+//     padding: 0px
+// }
+// .custom-iw .gm-style-iw {
+//     top:15px !important;
+//     left:0 !important;
+//     border-radius:2px;
+// }
+// .custom-iw>div:first-child>div:nth-child(2) {
+//     display:none;
+// }
+// .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+//     width:100% !important;
+//     max-width:100% !important;
+// }
+// /** set here the width **/
+// .custom-iw, .custom-iw>div:first-child>div:last-child {
+//     width:342px !important;
+// }
+// .custom-iw>div:first-child>div:last-child {
+//     left:0 !important;
+//     top:0px;
+//     box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px;
+//     z-index:-1 !important;
+// }
+// /** set here the desired background-color **/
+// #main-infoWindow, .custom-iw>div:first-child>div:nth-child(n-1)>div>div, .custom-iw>div>div:last-child, .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+//     background-color:orange !important;
+// }
+// /** close-button **/
+// .custom-iw>div:last-child {
+//     top:1px !important;
+//     right:0 !important;
+// }
+// /** padding of the content **/
+// #main-infoWindow {
+//     padding:6px;
+// }
+//
+//
+//
+//
+// // html, body, #map-canvas {
+// //     height: 100%;
+// //     margin: 0px;
+// //     padding: 0px
+// // }
+// .custom-iw .gm-style-iw {
+//     top:17px !important;
+//     left:0 !important;
+//     border-radius:2px;
+//
+//     // background-color:none !important;
+// }
+//
+//
+// // .custom-iw {
+// //   top: 30px;
+// // }
+//
+// .custom-iw>div:first-child>div:nth-child(2) {
+//     display:none;
+//     top: 20px
+//     // background-color:none !important;
+// }
+//
+// .custom-iw>div:first-child>div:nth-child(3) {
+//       // transform: rotate(90deg);
+//       // left: 0 !important;
+//       // top: 75px !important;
+//       top:0px;
+// }
+// .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+//     width:100% !important;
+//     max-width:100% !important;
+//     // background-color:none !important;
+// }
+// /** set here the width **/
+// .custom-iw, .custom-iw>div:first-child>div:last-child {
+//     width:342px !important;
+//     // background-color:none !important;
+// }
+// .custom-iw>div:first-child>div:last-child {
+//     left:0 !important;
+//     top:0px !important;
+//     // box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px;
+//     box-shadow: none;
+//     // background-color: none !important;
+//     z-index:-1 !important;
+// }
+// /** set here the desired background-color **/
+// #main-infoWindow, .custom-iw>div:first-child>div:nth-child(n-1)>div>div, .custom-iw>div>div:last-child, .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+//     // background-color:orange !important;
+//     // background-color:none !important;
+//
+//
+// }
+// /** close-button **/
+// .custom-iw>div:last-child {
+//     top:1px !important;
+//     right:0 !important;
+//     background-color: white !important;
+// }
+// /** padding of the content **/
+// #main-infoWindow {
+//   background-color: white !important;
+//   // background-color:none !important;
+//     // padding:6px;
+// }
+//
+// .custom-iw > div:first-child > div:last-child {
+//   // top: 30px !important;
+//   background-color: #11ffee00 !important;
+// }
+//
+// .gm-style-iw {
+//   // top:40px !important;
+// }

@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
+import React from 'react';
 import ReactStars from 'react-stars';
+import InfoWindowContent from './maps_content_string'
+import ReactDOMServer from 'react-dom/server';
+
 
 export default class MarkerManager {
   constructor(map, infowindow, handleClick) {
@@ -32,18 +36,18 @@ export default class MarkerManager {
   updateMarkers2(roomId) {
     let currentMarker = this.markers[roomId];
     this.removeMarker(this.markers[roomId]);
-    this.createMarkerFromMarker(currentMarker);
+    this.createMarkerFromMarker(currentMarker,this.infowindow, this.handleClick);
     return currentMarker;
   }
 
   updateMarkers3(marker) {
     if (this.markers[marker.roomId]) {
       this.removeMarker(marker);
-      this.createMarkerFromMarker2(marker);
+      this.createMarkerFromMarker2(marker, this.infowindow, this.handleClick);
     }
   }
 
-  createMarkerFromMarker2(currentMarker) {
+  createMarkerFromMarker2(currentMarker, infowindow, handleClick) {
     console.log(currentMarker.label);
     const marker = new google.maps.Marker({
       position: currentMarker.position,
@@ -51,12 +55,21 @@ export default class MarkerManager {
       label: {text: currentMarker.label.text, color: "black"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
       // animation: google.maps.Animation.DROP,
-      roomId: currentMarker.roomId
+      roomId: currentMarker.roomId,
+      room: currentMarker.room
     });
     this.markers[marker.roomId] = marker;
+    let infoWindowHelper = new InfoWindowContent();
+    let room = currentMarker.room;
+
+    marker.addListener('click', function () {
+      infowindow.setContent(infoWindowHelper.generateInfoWindowString(room));
+      infowindow.open(marker.map, marker);
+      infoWindowHelper.addListener(handleClick, room.id);
+    });
   }
 
-  createMarkerFromMarker(currentMarker) {
+  createMarkerFromMarker(currentMarker, infowindow, handleClick) {
     console.log(currentMarker.label);
     const marker = new google.maps.Marker({
       position: currentMarker.position,
@@ -64,7 +77,8 @@ export default class MarkerManager {
       label: {text: currentMarker.label.text, color: "white"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
       // animation: google.maps.Animation.DROP,
-      roomId: currentMarker.roomId
+      roomId: currentMarker.roomId,
+      room: currentMarker.room
     });
     this.markers[marker.roomId] = marker;
   }
@@ -86,78 +100,38 @@ export default class MarkerManager {
       label: {text: `$${room.price}`, color: "black"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
       // animation: google.maps.Animation.DROP,
-      roomId: room.id
+      roomId: room.id,
+      room: room
     });
     this.markers[marker.roomId] = marker;
 
+    // marker.addListener('click', function () {
+    //   handleClick(room.id);
+    // });
+    // infowindow.addListener('click', function () {
+    //   handleClick(room.id);
+    // });
+
+    let infoWindowHelper = new InfoWindowContent();
+
     marker.addListener('click', function () {
-      handleClick(room.id);
-    });
-    infowindow.addListener('click', function () {
-      handleClick(room.id);
-    });
-    var contentString = '<div id="content">'+
-      `<div id=room-${room.id}>`+
-      '</div>'+
-      `<img src=${room.pic_url} height="100px" width="150px"></img>` +
-      `<h4 id="firstHeading" class="firstHeading">$${room.price} ${room.title}</h4>`+
-      `<h5>${room.room_type} · ${room.beds} beds</h5>`+
-      '<div id="bodyContent">'+
-      '</div>'+
-      '</div>';
-
-    marker.addListener('mouseover', function () {
-      infowindow.close();
-      infowindow.setContent(contentString);
+      infowindow.setContent(infoWindowHelper.generateInfoWindowString(room));
       infowindow.open(marker.map, marker);
+      infoWindowHelper.addListener(handleClick, room.id);
     });
 
-    marker.addListener('mouseout', function () {
+
+    // [0].addEventListener('click', ()=>{console.log("WORKING!!!");});
+    google.maps.event.addListener(this.map, 'click', () => {
       infowindow.close();
     });
+
+    // this.infoWindow.addListener('click', ()=> {
+    //   handleClick();
+    // });
+    // marker.addListener('mouseout', function () {
+    //   infowindow.close();
+    // });
   }
 
 }
-
-
-
-// import React from 'react';
-//
-// class MarkerManager {
-//   constructor(map){
-//     this.map = map;
-//     this.markers = [];
-//   }
-//
-//   updateMarkers(rooms){
-//     rooms = rooms.length === 0 ? [] : rooms ;
-//     rooms.forEach( room => (this.markers[room.id] = room));
-//     const newMarkers = this.markers.filter((obj) =>  obj !== undefined );
-//     // const newMarkers = this.markers.keys.forEach( room => (this.markers[room.id] = room));
-//
-//     newMarkers
-//       .forEach((roomId) => this.removeMarker(newMarkers[newMarkers.roomId]));
-//     rooms
-//       .forEach( room => this.createMarkerFromRoom(room));
-//
-//     // Object.keys(this.markers)
-//     //   .filter(roomId => !this.markers[this.markers.id])
-//     //   .forEach((roomId) => this.removeMarker(this.markers[roomId]))
-//   }
-//
-//   createMarkerFromRoom(room) {
-//     const position = new google.maps.LatLng(room.lat, room.lng);
-//       const marker = new google.maps.Marker({
-//         position,
-//         map: this.map,
-//         roomId: room.id
-//       });
-//   }
-//
-//   removeMarker(marker) {
-//     this.markers[marker.roomId].setMap(null);
-//     delete this.markers[marker.roomId];
-//   }
-// }
-//
-// export default MarkerManager;
