@@ -41,7 +41,7 @@ class MainDisplay extends React.Component {
             <h4 className='room-description-2'>{room ? room.title : "" } </h4>
             <h5 className='room-description-3'>From ${ room ? room.price : "" } per night</h5>
             <div className='stars-count-host'>
-              <ReactStars className="react-stars" count={5} size={10} color2={'#00BEC5'} value={room ? room.review_rating : 0} edit={false} />
+              <ReactStars className="react-stars" count={5} size={10} color2={'#008489'} value={room ? room.review_rating : 0} edit={false} />
               <h5 className='room-description-4'>&nbsp;{ room ? room.review_count : "" }</h5>
               <h5 className='room-description-4'>&nbsp;· {room ? room.host_name : "" }</h5>
             </div>

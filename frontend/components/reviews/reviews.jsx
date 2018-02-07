@@ -38,12 +38,14 @@ class RoomReviews extends React.Component {
             <div className="top-of-review">
               <img src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1501181760/reviewer_iyelfn.png"></img>
               <div className="review-details">
-                <span>{review.reviewer_name ? review.reviewer_name : "" }</span>
-                <span>{review.created_at ? this.formatDate(review.created_at) : "" }</span>
+                <div className='review-name'>{review.reviewer_name ? review.reviewer_name : "" }</div>
+                <div className='review-date'>{review.created_at ? this.formatDate(review.created_at) : "" }</div>
+                <div className='review-stars'>
                   <ReactStars
-                    className="react-stars"
-                    count={5} size={15} color2={'#00BEC5'}
-                    value={review.rating ? review.rating : ""} edit={false} />
+                      className="react-stars"
+                      count={5} size={12} color2={'#008489'}
+                      value={review.rating ? review.rating : ""} edit={false} />
+                  </div>
                 </div>
               </div>
               <div>
@@ -89,7 +91,7 @@ class RoomReviews extends React.Component {
       <div className="show-page-reviews">
         <div className="review-header">
           <h2>{reviewCountDisplayText}</h2>
-          <ReactStars className="react-stars" count={5} size={30} color2={'#00BEC5'} value={ratingLogic} edit={false} />
+          <ReactStars className="react-stars" count={5} size={30} color2={'#008489'} value={ratingLogic} edit={false} />
           {displayAddButton}
         </div>
         {displayAllReviews}

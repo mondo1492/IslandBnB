@@ -4,7 +4,13 @@ import { Link } from 'react-router-dom';
 class Footer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      onFrontPage: true
+    }
+  }
 
+  componentDidMount() {
+    this.setState({ onFrontPage: this.props.onFrontPage})
   }
 
   handleClick() {
@@ -12,8 +18,9 @@ class Footer extends React.Component {
   }
 
   render() {
+    const { onFrontPage } = this.state;
     return(
-      <div className='footer'>
+      <div className={onFrontPage ? 'footer' : 'footer-alt'}>
         <div className='links'>
           <a href="https://github.com/mondo1492" target="_blank" className='github'>
             Github

@@ -24,7 +24,7 @@ class Search extends React.Component {
       bed_min: storedBedMin ? storedBedMin : 0,
       price_params: { min: storedPriceMin ? storedPriceMin : 0, max: 10000},
       price_min: storedPriceMin ? storedPriceMin : 0,
-      price_max: 10000,
+      price_max: storedPriceMax ? storedPriceMax : 10000,
       guest_params: { min: storedGuestMin ? storedGuestMin : 1, max: 50},
       guest_min: storedGuestMin ? storedGuestMin : 1,
       modalOpen1: false,
@@ -143,7 +143,7 @@ class Search extends React.Component {
       bed_params: Object.assign(this.state.bed_params, { min: this.state.bed_min}),
       guest_params: Object.assign(this.state.guest_params, { min: this.state.guest_min }),
       price_params: Object.assign(this.state.price_params, { min: this.state.price_min, max: this.state.price_max})
-    });
+    }, () => this.savePresets());
     this.updateRooms(this.state.bounds);
   }
 
@@ -212,7 +212,6 @@ class Search extends React.Component {
 
   componentWillUnmount() {
     this.savePresets();
-    console.log("UNMOUNTED");
   }
 
   priceDisplay() {
@@ -335,7 +334,7 @@ resetFilters() {
     price_max: 10000,
     bed_min: 0,
     guest_min: 1
-  });
+  }, () => this.savePresets());
 }
 
 

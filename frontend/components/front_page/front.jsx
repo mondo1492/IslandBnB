@@ -30,7 +30,7 @@ class Front extends React.Component {
             </Link>
           </div>
         </div>
-        <Footer/>
+        <Footer onFrontPage={true}/>
       </section>
     );
   }

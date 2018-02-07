@@ -18,31 +18,14 @@ class ShowRoom extends React.Component {
     }
   }
 
-  // componentWillMount(){
-  //   $(document).ready( () => {
-  //   this.setState({positionFromTop: $(".sticker").position().top});
-  // });
-  // }
-
   componentDidMount() {
-    // this.setState({positionTop: })
-  //     let s = $(".sticker");
-  //     $(window).scroll(() => {
-  //         let windowpos = $(window).scrollTop();
-  //         // console.log("Distance from top:" + pos.top);
-  //         // console.log("Scroll Position" + windowpos);
-  //         // s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
-  //         if ((windowpos + 80) >= this.state.positionFromTop) {
-  //             s.addClass("stick");
-  //             this.setState({alternate: true});
-  //         } else {
-  //             s.removeClass("stick");
-  //             this.setState({alternate: false});
-  //
-  //         }
-  // });
+    // $(window).off("scroll", this.registerWindowListeners());
+    // $(window).off("resize", this.registerWindowListeners());
+    this.registerWindowListeners();
+  }
 
-    window.addEventListener('resize', () => {
+  registerWindowListeners() {
+    $(window).resize(() => {
       let s = $("#floating-booking");
       let y = $("#floating-booking-placeholder");
       let pos = s.position();
@@ -97,6 +80,11 @@ class ShowRoom extends React.Component {
         <TripsContainer />
       </div>
     );
+  }
+
+  componentWillUnmount() {
+    $(window).off("scroll", this.registerWindowListeners());
+    $(window).off("resize", this.registerWindowListeners());
   }
 
   render(){

@@ -58,10 +58,11 @@
   background: none;
   border: none;
   cursor: pointer;
-  height: 30px;
-  border-radius: 20px;
+  padding: 10px 7px;
+  font-weight: bold;
+  border-radius: 4px;
   font-size: 15px;
   text-align: center;
-  background-color: $orange;
+  background-color: $bnb-pink;
   color: white;
 }

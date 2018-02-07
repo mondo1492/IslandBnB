@@ -1,4 +1,4 @@
-.footer {
+.footer, .footer-alt {
   display: flex;
   position: absolute;
   bottom: 0;
@@ -37,4 +37,9 @@
 .creator:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.footer-alt {
+  border-top: 1px solid lightgrey;
+  position: relative;
 }

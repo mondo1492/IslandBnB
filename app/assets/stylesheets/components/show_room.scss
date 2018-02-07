@@ -21,6 +21,7 @@
 
 .show-page-title {
   display: flex;
+  color: $bnb-darker-grey;
   flex-direction: column;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -75,6 +76,7 @@
   margin-left: 20px;
   margin-right: 20px;
   padding-bottom: 20px;
+  color: $bnb-darker-grey;
   border-bottom: 1px solid lightgrey;
   h2 {
     font-size: 22px;
@@ -92,6 +94,7 @@
 }
 .show-page-more-details {
   .detail-container, .detail-container-cancellation {
+    color: $bnb-darker-grey;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -110,6 +113,8 @@
   .detail-list {
     border-bottom: 1px solid lightgrey;
     margin-left: 0;
+    width: 100%;
+    margin-right: 20px;
     ul{
       margin-left: 0;
       padding-left: 0;
@@ -190,7 +195,7 @@
     border-radius: 20px;
     font-size: 15px;
     text-align: center;
-    background-color: $orange;
+    // background-color: $orange;
     color: white;
 }
 
@@ -233,13 +238,13 @@
 
 .room-details {
   width: 100%;
-  background-color: red;
+  // background-color: red;
 }
 
 #floating-booking {
   width: 450px;
   min-width: 450px;
-  background-color: green;
+  // background-color: green;
   padding-top: 20px;
   display: flex;
   justify-content: center
@@ -253,7 +258,7 @@
   width: 450px;
   min-width: 450px;
 
-  background-color: orange
+  // background-color: orange
   // position: fixed;
   // padding-top: 300px;
   // top: 100px;
@@ -312,7 +317,7 @@
 .sticker {
     // padding:20px;
     // margin:20px 0;
-    background:#AAA;
+    // background:#AAA;
     width:190px;
 }
 .stick {
@@ -325,8 +330,116 @@
 
 .guest-booking {
   padding: 40px;
+  color: $bnb-darker-grey;
+  background-color: white;
 }
 
 #booking-item-1 {
+  #booking-item-1-price {
+    font-size: 20px;
+  }
+  padding: 5px 0;
+  display: flex;
+  align-items: baseline;
   border-bottom: 1px solid lightgrey;
+
+}
+
+#booking-item-2 {
+  padding: 10px 0;
+  display: flex;
+  flex-direction:column;
+}
+
+#booking-item-3 {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+
+  // text-align: center;
+  input {
+    height: 52px;
+    margin-left: 0;
+    padding: none;
+  }
+
+}
+
+#booking-item-tag {
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+.date-range-picker-wrapper {
+  // text-align: center;
+
+}
+
+.DateRangePickerInput {
+  width: 348px;
+  padding: 1px;
+}
+
+.css-jgdrvu {
+  div {
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: $bnb-darker-grey;
+  }
+}
+
+.booking-content {
+  font-weight: 300;
+  background-color: white;
+  padding: 5px 20px;
+  border: 1px solid lightgrey;
+  div {
+    .css-jgdrvu {
+      div {
+        color: white;
+      }
+    }
+  }
+}
+
+.booking-item-4 {
+  div {
+    display: flex;
+    font-weight: lighter;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    padding: 12px 0;
+    border-bottom: 1px solid lightgrey;
+  }
+}
+
+#booking-item-4-total-cost {
+  font-weight: bold;
+  // padding-bottom: 10px;
+  border: 0;
+}
+
+.booking-button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 14px;
+    border-radius: 4px;
+    font-size: 19px;
+    text-align: center;
+    align-content: center;
+    background-color: $bnb-pink;
+    font-weight: 700;
+    color: white;
+  }
+}
+.css-1vy3jc0, {
+  color: white !important;
+  background-color: $bnb-green !important;
 }
