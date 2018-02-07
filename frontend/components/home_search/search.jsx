@@ -328,6 +328,7 @@ class Search extends React.Component {
       </div>
     );
   }
+
 resetFilters() {
   this.setState({
     price_min: 0,
@@ -336,8 +337,6 @@ resetFilters() {
     guest_min: 1
   }, () => this.savePresets());
 }
-
-
 
 render() {
   return(

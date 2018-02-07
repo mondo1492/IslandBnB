@@ -1,7 +1,7 @@
 # Spacebnb
 URL: [Live Link](https://space-bnb.herokuapp.com)
 
-Spacebnb is an Airbnb clone with a space-theme twist.  It is a full-stack, single-page, web application built using Ruby on Rails, a PostGreSQL database, React/Redux, Google Maps and Cloudinary.
+Islandbnb is an Airbnb clone with a island-theme twist.  It is a full-stack, single-page, web application built using Ruby on Rails, a PostGreSQL database, React/Redux, Google Maps and Cloudinary.
 
 ## Features
 * User accounts, with secure authentication both on backend and on the frontend
@@ -70,7 +70,7 @@ Below is an example of a state shape for the home index page:
 ```
 
 ## Map Filters
-Spacebnb offers real-time map-filtering based map location. The Redux state is updated with a list of all the homes matching both the filter query and location bounds. Map markers are then populated on the map as an overlay for every location stored in the state. With every filter or idle state of the map, old map markers are replaced with new map markers; the bounds also resize automatically when zooming in or out of the map.
+Islandbnb offers real-time map-filtering based map location. The Redux state is updated with a list of all the homes matching both the filter query and location bounds. Map markers are then populated on the map as an overlay for every location stored in the state. With every filter or idle state of the map, old map markers are replaced with new map markers; the bounds also resize automatically when zooming in or out of the map.
 
 ![search](/app/assets/images/map_search.gif)
 

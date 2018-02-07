@@ -109,7 +109,7 @@ class Greeting extends React.Component {
     } else {
       return (
         <div className="switch">
-          <h4>Already have an Spacebnb account?</h4>
+          <h4>Already have an Islandbnb account?</h4>
           <input
             type="submit"
             onClick={this.handleClick.bind(this, true)}
