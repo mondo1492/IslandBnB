@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import values from 'lodash/values';
 import Trips from './trips';
-import { addTrip, viewTrips, getAllTripsSpecific } from '../../actions/trip_actions';
+import { viewTrips, deleteTrip } from '../../actions/trip_actions';
 import { withRouter } from 'react-router';
 
 const mapStateToProps = ({ session, trips }, ownProps) => {
@@ -12,7 +12,8 @@ const mapStateToProps = ({ session, trips }, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    viewTrips: () => dispatch(viewTrips())
+    viewTrips: () => dispatch(viewTrips()),
+    deleteTrip: tripId => dispatch(deleteTrip(tripId))
   };
 };
 

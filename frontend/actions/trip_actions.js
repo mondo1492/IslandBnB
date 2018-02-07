@@ -1,11 +1,17 @@
 export const RECEIVE_TRIP = 'RECEIVE_TRIP';
 export const RECEIVE_TRIPS = 'RECEIVE_TRIPS';
+export const REMOVE_TRIP = 'REMOVE_TRIP';
 export const RECEIVE_SPECIFIC_TRIPS = 'RECEIVE_SPECIFIC_TRIPS';
 import * as APITripUtil from '../util/trip_api_util';
 
 
 export const receiveTrip = trip => ({
   type: RECEIVE_TRIP,
+  trip
+});
+
+export const removeTrip = trip => ({
+  type: REMOVE_TRIP,
   trip
 });
 
@@ -35,5 +41,11 @@ export const viewTrips = () => dispatch => {
 export const addTrip = trip => dispatch => {
   return APITripUtil.addTrip(trip).then(
     response => dispatch(receiveTrip(response))
+  );
+};
+
+export const deleteTrip = trip => dispatch => {
+  return APITripUtil.deleteTrip(trip).then(
+    response => dispatch(removeTrip(response))
   );
 };

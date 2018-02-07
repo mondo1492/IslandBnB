@@ -27,3 +27,10 @@ export const showTrip = id => (
     url: `api/trips/${id}`
   })
 );
+
+export const deleteTrip = id => (
+  $.ajax({
+    method: 'DELETE',
+    url: `api/trips/${id}`
+  })
+);

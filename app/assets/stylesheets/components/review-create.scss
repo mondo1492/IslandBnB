@@ -54,7 +54,7 @@
   }
 }
 
-#review-button-main2 {
+.review-button-main2 {
   background: none;
   border: none;
   cursor: pointer;
@@ -65,4 +65,8 @@
   text-align: center;
   background-color: $bnb-pink;
   color: white;
+}
+
+.review-button-main2:hover {
+  opacity: 0.2;
 }

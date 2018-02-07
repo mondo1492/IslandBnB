@@ -12,6 +12,15 @@ class Api::TripsController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
   end
+  
+  def destroy
+    @trip = Trip.find(params[:id])
+    if @trip.destroy
+      render :show
+    else
+      render json: @room.errors.full_messages, status: 422
+    end
+  end
 
   def create
     @trip = Trip.new(trip_params)

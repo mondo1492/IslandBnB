@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :listings, only: :show
     resources :pictures, only: %i(new index create destroy)
     resources :reviews, only: %i(show create)
-    resources :trips, only: %i(show create index room_specific_index)
+    resources :trips, only: %i(show create destroy index room_specific_index)
     get "trips/specific/:id", to: "trips#room_specific_index"
   end
 end

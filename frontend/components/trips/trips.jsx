@@ -14,6 +14,10 @@ class Trips extends React.Component {
       pastTrips: []
     }
     this.categorizeTrips = this.categorizeTrips.bind(this);
+    this.deleteTrip = this.deleteTrip.bind(this);
+    this.showListing = this.showListing.bind(this);
+    this.tripItem = this.tripItem.bind(this);
+    this.formatDate = this.formatDate.bind(this);
   }
 
   componentWillMount() {
@@ -22,6 +26,11 @@ class Trips extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.categorizeTrips(nextProps.trips);
+  }
+
+  deleteTrip(e) {
+    e.preventDefault();
+    this.props.deleteTrip(e.currentTarget.value);
   }
 
 
@@ -47,7 +56,7 @@ class Trips extends React.Component {
     trips.forEach(trip => {
       if (this.formatMoment(trip.end_date).diff(today, 'day') <= 0) {
         pastTrips.push(trip);
-      } else if (this.formatMoment(trip.start_date).diff(today, 'day') >= 0){
+      } else if (this.formatMoment(trip.start_date).diff(today, 'day') > 0){
         futureTrips.push(trip);
       } else {
         currentTrips.push(trip);
@@ -60,67 +69,77 @@ class Trips extends React.Component {
     });
   }
 
+  showListing(e) {
+    e.preventDefault();
+    this.props.history.push(`/rooms/${e.currentTarget.value}`);
+  }
+
+  tripItem(tripStatus, trip, i) {
+    const begin = { 'C': 'Began', 'F': 'Begins', 'P': 'Began'};
+    const end = { 'C': 'Ends', 'F': 'Ends', 'P': 'Ended'};
+    return(
+      <li key={`trip-${i}`}>
+        <div className="trip-item">
+          <img src={ trip.room_url ? trip.room_url : "" }></img>
+          <div className='trip-item-details'>
+            <span>Your Trip with { trip.host_name ? trip.host_name : "" }</span>
+            <ul>
+              <li>{begin[tripStatus]} on { trip.start_date ? this.formatDate(trip.start_date) : "" }</li>
+              <li>{end[tripStatus]} on { trip.end_date ? this.formatDate(trip.end_date) : "" }</li>
+              <li>Costing ${ trip.total_cost ? trip.total_cost : "" }</li>
+              <li>At { trip.room_address ? trip.room_address : "" }</li>
+            </ul>
+          </div>
+          <div className='trip-buttons'>
+            <button className='review-button-main2' value={trip.room_id} onClick={this.showListing}>
+              View listing or Book again
+            </button>
+            { tripStatus === 'F' ?
+              <button
+                className='review-button-main2 review-button-main2-cancel'
+                value={trip.id}
+                onClick={this.deleteTrip}>
+                  Cancel this trip
+              </button> : ""
+            }
+          </div>
+        </div>
+      </li>
+    );
+  }
 
   render() {
     const {currentTrips, futureTrips, pastTrips} = this.state;
     return(
       <div>
         <Header/>
+        <div className='trips-header'>
+          <span id='trips-header-title'>Your Trips</span>
+          <span id='trips-header-desc'>View current, future, and past trips</span>
+        </div>
+
         <div className='trips-container'>
           <div>
-            <h2 id="your-trips">Current trips!</h2>
+            <span className="trip-status">Current trips</span>
             <ul className="trip-index">
               {currentTrips.map((trip, i) => (
-                <li key={`trip-${i}`}>
-                  <div className="trip-item">
-                    <img src={ trip.room_url ? trip.room_url : "" }></img>
-                    <div>
-                      <h2>Your Trip with { trip.host_name ? trip.host_name : "" }</h2>
-                      <h4>Began on { trip.start_date ? this.formatDate(trip.start_date) : "" }</h4>
-                      <h4>Ending on { trip.end_date ? this.formatDate(trip.end_date) : "" }</h4>
-                      <h4>Costing ${ trip.total_cost ? trip.total_cost : "" }</h4>
-                      <h4>At { trip.room_address ? trip.room_address : "" }</h4>
-                    </div>
-                  </div>
-                </li>
+                this.tripItem('C', trip, i)
               ))}
             </ul>
           </div>
           <div>
-            <h2 id="your-trips">Future trips!</h2>
+            <span className="trip-status">Future trips</span>
             <ul className="trip-index">
               {futureTrips.map((trip, i) => (
-                <li key={`trip-${i}`}>
-                  <div className="trip-item">
-                    <img src={ trip.room_url ? trip.room_url : "" }></img>
-                    <div>
-                      <h2>Your Trip with { trip.host_name ? trip.host_name : "" }</h2>
-                      <h4>Beginning on { trip.start_date ? this.formatDate(trip.start_date) : "" }</h4>
-                      <h4>Ending on { trip.end_date ? this.formatDate(trip.end_date) : "" }</h4>
-                      <h4>Costing ${ trip.total_cost ? trip.total_cost : "" }</h4>
-                      <h4>At { trip.room_address ? trip.room_address : "" }</h4>
-                    </div>
-                  </div>
-                </li>
+                this.tripItem('F', trip, i)
               ))}
             </ul>
           </div>
           <div>
-            <h2 id="your-trips">Past trips!</h2>
+            <span className="trip-status">Past trips</span>
             <ul className="trip-index">
               {pastTrips.reverse().map((trip, i) => (
-                <li key={`trip-${i}`}>
-                  <div className="trip-item">
-                    <img src={ trip.room_url ? trip.room_url : "" }></img>
-                    <div>
-                      <h2>Your Trip with { trip.host_name ? trip.host_name : "" }</h2>
-                      <h4>Began on { trip.start_date ? this.formatDate(trip.start_date) : "" }</h4>
-                      <h4>Ended on { trip.end_date ? this.formatDate(trip.end_date) : "" }</h4>
-                      <h4>Cost ${ trip.total_cost ? trip.total_cost : "" }</h4>
-                      <h4>At { trip.room_address ? trip.room_address : "" }</h4>
-                    </div>
-                  </div>
-                </li>
+                this.tripItem('P', trip, i)
               ))}
             </ul>
           </div>
