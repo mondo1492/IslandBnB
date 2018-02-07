@@ -19,8 +19,6 @@ class ShowRoom extends React.Component {
   }
 
   componentDidMount() {
-    // $(window).off("scroll", this.registerWindowListeners());
-    // $(window).off("resize", this.registerWindowListeners());
     this.registerWindowListeners();
   }
 
@@ -77,7 +75,15 @@ class ShowRoom extends React.Component {
   showBooking() {
     return(
       <div className='booking-item'>
-        <TripsContainer />
+        <TripsContainer isLoggedIn={this.props.currentUser}/>
+      </div>
+    );
+  }
+
+  showSignIn() {
+    return(
+      <div className='booking-item'>
+        Sign up or log in to book.
       </div>
     );
   }
@@ -88,23 +94,9 @@ class ShowRoom extends React.Component {
   }
 
   render(){
-    // console.log();
     const room = this.props.room;
-    const showBooking = this.props.currentUser ? this.showBooking() : "";
+    // const showBooking = this.props.currentUser ? this.showBooking() : "";
 
-
-
-//
-// <div id="wrapper">
-//   <div id="mainContent">
-//     <!--Content for your main div - like a blog post-->
-//   </div>
-//   <div id="sideBar">
-//     <!--Some content in your right column/sidebar-->
-//     <div id="sticker">...start scrolling to watch me stick</div>
-//   </div>
-//   <div class="clear"></div>
-// </div>
     let alternate = this.state.alternate;
     return(
       <div>
@@ -123,7 +115,7 @@ class ShowRoom extends React.Component {
               <a href="#host"></a>
             </div>
             <div id="floating-booking" className='sticker'>
-              { showBooking }
+              { this.showBooking() }
             </div>
             { alternate === true ?
               <div id="floating-booking-placeholder">
@@ -138,12 +130,3 @@ class ShowRoom extends React.Component {
 }
 
 export default ShowRoom;
-// add back in when have time
-// <NavLinks url={`#/rooms/${this.props.match.params.id}`}/>
-// <div className="show-page-host">
-//   <h3>Host info</h3>
-// </div>
-// <a name="location"></a>
-// <div className="show-page-location">
-//   <h3>Location</h3>
-// </div>

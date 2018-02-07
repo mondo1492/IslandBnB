@@ -154,11 +154,25 @@ class Booking extends React.Component {
   calculatePerDayPrice() {
     return (this.props.room.price + (15 * (this.state.booking.num_guests - 1)));
   }
+  
+  loginToContinue() {
+    return (
+      <button value={this.state.totalCost} onClick={()=>{$('#login').click()}}>Log in to book</button>
+    );
+  }
+
+  bookButton() {
+    return (
+      <button value={this.state.totalCost} onClick={()=>this.handleSubmit()}>Request to Book</button>
+    );
+  }
 
   showButton() {
+    console.log(this.props.isLoggedIn);
+    const bookOrLogin = this.props.isLoggedIn ? this.bookButton() : this.loginToContinue();
     return (
       <div className="booking-button-container">
-        <button value={this.state.totalCost} onClick={()=>this.handleSubmit()}>Request to Book</button>
+        {bookOrLogin}
       </div>
     );
   }

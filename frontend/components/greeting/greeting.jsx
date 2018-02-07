@@ -14,6 +14,7 @@ class Greeting extends React.Component {
     this.onModalClose = this.onModalClose.bind(this);
     this.openModal = this.openModal.bind(this);
     this.openHelpModal = this.openHelpModal.bind(this);
+    this.goHome = this.goHome.bind(this);
   }
 
   handleClick(bool) {
@@ -44,66 +45,82 @@ class Greeting extends React.Component {
     }
   }
 
+  goHome() {
+    return this.props.history.push(`/islands/`);
+  }
+
+
+  helpModal() {
+    return (
+      <Modal
+        isOpen={this.state.helpModalOpen}
+        onRequestClose={this.onModalClose}
+        className="modal help-modal"
+        overlayClassName="modal-overlay"
+        contentLabel="help-modal">
+        <button className="X" onClick={this.onModalClose}>&times;</button>
+        <div>
+          <h2>Welcome to IslandBnb!</h2>
+          <h3>Let me tell you some of the things you can do:</h3>
+          <ul>
+            <li className='ul-title'>Signing up / Logging In:</li>
+            <ul>
+              <li>Sign up or Log in to create listings, book rooms, leave reviews, and view your all your trips.</li>
+            </ul>
+            <li className='ul-title'>Searching through listings on main page:</li>
+            <ul>
+              <li>Hover over listings on the left side of the screen to view where they are on the map.</li>
+              <li>When logged in, hover over profile icon (top right) to view some other functionality.</li>
+              <li>Use the search bar (top left) to search for a specific place you want to go.</li>
+              <li>Use the filter buttons to filter rooms by price range, guests allowed, and beds offered.</li>
+              <li>Move Google map bounds to update listings within those bounds.</li>
+              <li>Click on Google map markers to view listing details directly from map.</li>
+              <li>Click on that InfoWindow popup to view that listing</li>
+            </ul>
+            <li className='ul-title'>Viewing a listing:</li>
+            <ul>
+              <li>Book a room by selecting dates and guest number.*</li>
+              <li>Leave a review.*</li>
+              <li>* Must be logged in.</li>
+            </ul>
+            <li className='ul-title'>And much, much more!</li>
+          </ul>
+        </div>
+      </Modal>
+    );
+  }
+
   newSessionLinks() {
     return (
       <nav>
           <button className="link" onClick={this.openHelpModal}>
             <h4>Help</h4>
           </button>
+          <button className="link" onClick={this.goHome}>
+            <h4>Home</h4>
+          </button>
           <button className="link" onClick={this.handleClick.bind(this, false)}>
             <h4>Sign Up</h4>
           </button>
-          <button className="link" onClick={this.handleClick.bind(this, true)}>
+          <button className="link" id='login' onClick={this.handleClick.bind(this, true)}>
             <h4>Log In</h4>
           </button>
-          <Modal
-            isOpen={this.state.helpModalOpen}
-            onRequestClose={this.onModalClose}
-            className="modal help-modal"
-            overlayClassName="modal-overlay"
-            contentLabel="help-modal">
-            <button className="X" onClick={this.onModalClose}>&times;</button>
-            <div>
-              <h2>Welcome to IslandBnb!</h2>
-              <h3>Let me tell you some of the things you can do:</h3>
-              <ul>
-                <li className='ul-title'>Signing up / Logging In:</li>
-                <ul>
-                  <li>Sign up or Log in to create listings, book rooms, leave reviews, and view your all your trips.</li>
-                </ul>
-                <li className='ul-title'>Searching through listings on main page:</li>
-                <ul>
-                  <li>Hover over listings on the left side of the screen to view where they are on the map.</li>
-                  <li>When logged in, hover over profile icon (top right) to view some other functionality.</li>
-                  <li>Use the search bar (top left) to search for a specific place you want to go.</li>
-                  <li>Use the filter buttons to filter rooms by price range, guests allowed, and beds offered.</li>
-                  <li>Move Google map bounds to update listings within those bounds.</li>
-                  <li>Click on Google map markers to view listing details directly from map.</li>
-                  <li>Click on that InfoWindow popup to view that listing</li>
-                </ul>
-                <li className='ul-title'>Viewing a listing:</li>
-                <ul>
-                  <li>Book a room by selecting dates and guest number.*</li>
-                  <li>Leave a review.*</li>
-                  <li>* Must be logged in.</li>
-                </ul>
-                <li className='ul-title'>And much, much more!</li>
-              </ul>
-            </div>
-          </Modal>
+          {this.helpModal()}
       </nav>
     );
   }
   currentSession(currentUser, logout, resetErrors) {
     return (
       <nav>
-        <button className="link" onClick={this.handleClick}>
+        <button className="link" onClick={this.openHelpModal}>
           <h4>Help</h4>
         </button>
-
+        <button className="link" onClick={this.goHome}>
+          <h4>Home</h4>
+        </button>
         <div className="dropdown">
           <button className="dropbtn" data-toggle="dropdown-toggle">
-            <img src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1500516308/users_oq566g.svg" height="30" width="30"></img>
+            <img src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1500516308/users_oq566g.svg" height="45" width="45"></img>
           </button>
           <div className="dropdown-content">
             <ul className="dropdown-menu">
@@ -128,7 +145,7 @@ class Greeting extends React.Component {
 
           </div>
         </div>
-
+        {this.helpModal()}
       </nav>
     );
   }
