@@ -8,10 +8,12 @@ class Greeting extends React.Component {
     super(props);
     this.state = {
       modalOpen: false,
+      helpModalOpen: false,
       signIn: false
     };
     this.onModalClose = this.onModalClose.bind(this);
     this.openModal = this.openModal.bind(this);
+    this.openHelpModal = this.openHelpModal.bind(this);
   }
 
   handleClick(bool) {
@@ -26,10 +28,14 @@ class Greeting extends React.Component {
   }
 
   onModalClose() {
-    this.setState({ modalOpen: false});
+    this.setState({ modalOpen: false, helpModalOpen: false });
     if (this.props.errors.length >= 1) {
       this.props.resetErrors();
     }
+  }
+
+  openHelpModal() {
+    this.setState({helpModalOpen: true})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,17 +47,50 @@ class Greeting extends React.Component {
   newSessionLinks() {
     return (
       <nav>
-          <button className="link" onClick={this.handleClick}>
+          <button className="link" onClick={this.openHelpModal}>
             <h4>Help</h4>
           </button>
-
           <button className="link" onClick={this.handleClick.bind(this, false)}>
             <h4>Sign Up</h4>
           </button>
-
           <button className="link" onClick={this.handleClick.bind(this, true)}>
             <h4>Log In</h4>
           </button>
+          <Modal
+            isOpen={this.state.helpModalOpen}
+            onRequestClose={this.onModalClose}
+            className="modal help-modal"
+            overlayClassName="modal-overlay"
+            contentLabel="help-modal">
+            <button className="X" onClick={this.onModalClose}>&times;</button>
+            <div>
+              <h2>Welcome to IslandBnb!</h2>
+              <h3>Let me tell you some of the things you can do:</h3>
+              <ul>
+                <li className='ul-title'>Signing up / Logging In:</li>
+                <ul>
+                  <li>Sign up or Log in to create listings, book rooms, leave reviews, and view your all your trips.</li>
+                </ul>
+                <li className='ul-title'>Searching through listings on main page:</li>
+                <ul>
+                  <li>Hover over listings on the left side of the screen to view where they are on the map.</li>
+                  <li>When logged in, hover over profile icon (top right) to view some other functionality.</li>
+                  <li>Use the search bar (top left) to search for a specific place you want to go.</li>
+                  <li>Use the filter buttons to filter rooms by price range, guests allowed, and beds offered.</li>
+                  <li>Move Google map bounds to update listings within those bounds.</li>
+                  <li>Click on Google map markers to view listing details directly from map.</li>
+                  <li>Click on that InfoWindow popup to view that listing</li>
+                </ul>
+                <li className='ul-title'>Viewing a listing:</li>
+                <ul>
+                  <li>Book a room by selecting dates and guest number.*</li>
+                  <li>Leave a review.*</li>
+                  <li>* Must be logged in.</li>
+                </ul>
+                <li className='ul-title'>And much, much more!</li>
+              </ul>
+            </div>
+          </Modal>
       </nav>
     );
   }

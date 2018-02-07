@@ -51,3 +51,38 @@
   color: #484848;
   padding-bottom: 40px;
 }
+
+.help-modal {
+  padding: 30px;
+  width: 700px;
+  color: $bnb-darker-grey;
+  .X {
+    color:  $bnb-darker-grey;
+    right: 40px;
+  }
+  div {
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: normal;
+      // padding-bottom: 5px;
+    }
+    ul {
+      color: $bnb-green;
+      font-size: 16px;
+      font-weight: lighter;
+      list-style-type: disc;
+      li {
+        padding: 5px;
+      }
+    }
+  }
+}
+
+.ul-title {
+  font-weight: bold;
+}
