@@ -130,8 +130,8 @@ class Greeting extends React.Component {
         <div className="left-header-group">
             <a href="/">
             <img
-              src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1500430834/rocketLogo_ap6uiz.svg"
-              height="40" width="40">
+              src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1517973156/sun_kfemxc.svg"
+              height="50" width="50">
             </img>
           </a>
           { this.props.location.pathname === "/islands/" ?
