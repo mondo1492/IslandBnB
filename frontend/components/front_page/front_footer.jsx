@@ -13,10 +13,6 @@ class Footer extends React.Component {
     this.setState({ onFrontPage: this.props.onFrontPage})
   }
 
-  handleClick() {
-    <a href="https://www.thesitewizard.com/" target="_blank">thesitewizard.com</a>
-  }
-
   render() {
     const { onFrontPage } = this.state;
     return(

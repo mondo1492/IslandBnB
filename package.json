@@ -1,5 +1,5 @@
 {
-  "name": "islandBNB",
+  "name": "spaceBNB",
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "^2.2.1",
