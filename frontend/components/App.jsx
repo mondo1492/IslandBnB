@@ -8,7 +8,6 @@ import MainDisplayContainer from './main_display/main_display_container';
 import CreateRoomContainer from './rooms/room_container';
 import EditRoomContainer from './rooms/editRoomContainer';
 import GeoLocation from './rooms/geo_location';
-import GoogleMap from './google_map/map';
 import ListingsContainer from './user_listings/user_listings_container';
 import ShowRoomContainer from './show_individual_room/show_room_container';
 import SearchContainer from './home_search/search_container';
