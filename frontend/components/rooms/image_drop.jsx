@@ -11,6 +11,8 @@ class DropForm extends React.Component {
     this.state = {
       uploadedFileCloudinaryUrl: ''
     };
+    this.defaultUrl = this.defaultUrl.bind(this);
+    this.resetPic = this.resetPic.bind(this);
   }
 
   onImageDrop(files) {
@@ -39,6 +41,14 @@ class DropForm extends React.Component {
     });
   }
 
+  defaultUrl(e) {
+    e.preventDefault();
+    console.log("HELLO");
+    const defaultURL = 'https://i.ytimg.com/vi/r5U2RLT-Gg4/maxresdefault.jpg';
+    this.props.updateUrl(defaultURL);
+    this.setState({uploadedFileCloudinaryUrl: defaultURL})
+  }
+
   fileUpload(){
     return(
       <div className="FileUpload">
@@ -48,9 +58,18 @@ class DropForm extends React.Component {
           accept="image/*"
           onDrop={this.onImageDrop.bind(this)}>
           <p>Drop an image or click to select a file to upload.</p>
+            <p className='dropzone-default-option'
+              onClick={this.defaultUrl}>
+              Or use a deafult image
+            </p>
         </Dropzone>
+
       </div>
     );
+  }
+
+  resetPic() {
+    this.setState({uploadedFileCloudinaryUrl: ""});
   }
 
   displayFile() {
@@ -59,6 +78,7 @@ class DropForm extends React.Component {
         {this.state.uploadedFileCloudinaryUrl === '' ? null :
         <div className="img-drop-container">
           <img src={this.state.uploadedFileCloudinaryUrl} />
+          <button onClick={this.resetPic}>Change picture</button>
         </div>}
       </div>
     );
