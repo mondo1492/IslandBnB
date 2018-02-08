@@ -6,8 +6,6 @@ import ReactDOMServer from 'react-dom/server';
 
 export default class InfoWindowContent {
   addListener(handleClick, roomId) {
-    console.log(handleClick);
-    console.log("WORKING IN HERE");
     document.getElementsByClassName('gm-style-iw')[0].addEventListener('click', ()=> {
       handleClick(roomId);
     });
@@ -47,20 +45,5 @@ export default class InfoWindowContent {
       + `</div>`
       + `</div>`
       + `</div>`;
-    // return '<div id="main-infoWindow">'
-    //   + '<div class="map-room-display">'
-    //   + `<img src=${room.pic_url} height="200" width="100%"</img>`
-    //   + `<div class='info-window-description'>`
-    //   + `<h5 class='room-description-1'> ${room.room_type.toUpperCase()} · ${room.beds} BEDS</h5>`
-    //   + `<h4 class='room-description-2'>${room.title} </h4>`
-    //   + `<h5 class='room-description-3'>From $${room.price} per night</h5>`
-    //   + `<div class='info-window-description-rating'>`
-    //   + this.generateInfoWindowStars(room.review_rating)
-    //   + `<h5 className='room-description-4'>&nbsp;${room.review_count}</h5>`
-    //   + `<h5 className='room-description-4'>&nbsp;· ${room.host_name}</h5>`
-    //   + `</div>`
-    //   + `</div>`
-    //   + `</div>`
-    //   + `</div>`;
   }
 }

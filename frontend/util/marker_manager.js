@@ -15,9 +15,7 @@ export default class MarkerManager {
   }
 
   updateMarkers(rooms) {
-    console.log(this.markers);
     const roomsObj = {};
-
 
     rooms.forEach((room) => {
       roomsObj[room.id] = room;
@@ -28,6 +26,7 @@ export default class MarkerManager {
       .forEach((newRoom) => {
       this.createMarkerFromRoom(newRoom, this.infowindow, this.handleClick);
     });
+
     Object.keys(this.markers)
       .filter(roomId => !roomsObj[roomId])
       .forEach((roomId) => this.removeMarker(this.markers[roomId]));
@@ -48,7 +47,6 @@ export default class MarkerManager {
   }
 
   createMarkerFromMarker2(currentMarker, infowindow, handleClick) {
-    console.log(currentMarker.label);
     const marker = new google.maps.Marker({
       position: currentMarker.position,
       map: this.map,
@@ -76,7 +74,6 @@ export default class MarkerManager {
       map: this.map,
       label: {text: currentMarker.label.text, color: "white"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
-      // animation: google.maps.Animation.DROP,
       roomId: currentMarker.roomId,
       room: currentMarker.room
     });
@@ -99,18 +96,10 @@ export default class MarkerManager {
       map: this.map,
       label: {text: `$${room.price}`, color: "black"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
-      // animation: google.maps.Animation.DROP,
       roomId: room.id,
       room: room
     });
     this.markers[marker.roomId] = marker;
-
-    // marker.addListener('click', function () {
-    //   handleClick(room.id);
-    // });
-    // infowindow.addListener('click', function () {
-    //   handleClick(room.id);
-    // });
 
     let infoWindowHelper = new InfoWindowContent();
 
@@ -120,18 +109,9 @@ export default class MarkerManager {
       infoWindowHelper.addListener(handleClick, room.id);
     });
 
-
-    // [0].addEventListener('click', ()=>{console.log("WORKING!!!");});
     google.maps.event.addListener(this.map, 'click', () => {
       infowindow.close();
     });
-
-    // this.infoWindow.addListener('click', ()=> {
-    //   handleClick();
-    // });
-    // marker.addListener('mouseout', function () {
-    //   infowindow.close();
-    // });
   }
 
 }

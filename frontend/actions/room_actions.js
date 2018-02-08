@@ -54,7 +54,6 @@ export const showAllRooms = (filters) => dispatch => {
   );
 };
 
-//write a delete room action or remove room action
 export const deleteRoom = room => dispatch => {
   return APIRoomUtil.deleteRoom(room).then(
     response => dispatch(removeRoom(response))

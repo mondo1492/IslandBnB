@@ -1,7 +1,6 @@
 class Api::RoomsController < ApplicationController
   def index
     @rooms = Room.in_bounds(params[:bounds]).includes(:user, :reviews)
-    # @rooms = Room.all
   end
 
   def show
