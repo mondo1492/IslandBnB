@@ -17,7 +17,9 @@ class GeoLocation extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setMarkerAndCenter(new google.maps.LatLng(nextProps.lat, nextProps.lng));
+    if (nextProps.lat !== null) {
+      this.setMarkerAndCenter(new google.maps.LatLng(nextProps.lat, nextProps.lng));
+    }
   }
 
   componentDidMount() {

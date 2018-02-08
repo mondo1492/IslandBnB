@@ -8,6 +8,7 @@ import MoreDetails from './more_details';
 import ReviewsContainer from '../reviews/reviews_container';
 import TripsContainer from '../trips/trips_container';
 import Header from '../header.jsx';
+import Footer from '../front_page/front_footer.jsx';
 
 class ShowRoom extends React.Component {
   constructor(props) {
@@ -124,6 +125,7 @@ class ShowRoom extends React.Component {
           </div>
         </div>
         </div>
+        <Footer/>
       </div>
     );
   }

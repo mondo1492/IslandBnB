@@ -1,58 +1,54 @@
 .review-container {
-  padding-top: 40px;
+  padding-top: 50px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  div {
-    padding-left: 100px;
-    padding-right: 100px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    h3 {
-      padding: none;
-      margin: none;
-    }
+  color: $bnb-darker-grey;
+    div {
+      padding-left: 80px;
+      padding-top: 10px;
+      padding-right: 80px;
     textarea {
       font-size: 15px;
-      height: 150px;
-    }
-    select {
-      font-size: 15px;
-      padding-bottom: 20px;
+      height: 75px;
+      width: 310px;
+      margin-left: 10px;
+      margin-top: 5px;
+      padding: 20px;
     }
   }
   button {
     cursor: pointer;
-    margin-top: 30px;
-    height: 30px;
-    border-radius: 20px;
+    margin-top: 20px;
+    height: 40px;
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 4px;
     font-size: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
     background: none;
     border: none;
-    background-color: $orange;
+    background-color: $bnb-pink;
     color: white;
   }
 }
 
-.calculate-button-container {
-  display: flex;
-  justify-content: center;
-  padding-top: 30px;
-  button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    height: 30px;
-    border-radius: 20px;
-    font-size: 15px;
-    text-align: center;
-    background-color: $orange;
-    color: white;
-  }
+.review-modal-header {
+  color: $bnb-darker-grey;
+  padding-left: 25px;
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 3;
+  border-bottom: 2px solid lightgrey;
 }
+
+.review-modal-sub-header {
+  font-size: 25px;
+  color: $bnb-green;
+  font-weight: bold;
+  letter-spacing: 2;
+}
+
 
 .review-button-main2 {
   background: none;
@@ -69,4 +65,8 @@
 
 .review-button-main2:hover {
   opacity: 0.2;
+}
+
+.react-stars-review {
+  margin-top: -10px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import merge from 'lodash/merge';
+import ReactStars from 'react-stars';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -33,35 +34,30 @@ class ReviewItem extends React.Component {
    };
   }
 
-  updateList(field) {
-    return e => {
+  updateStarCount(rating) {
       this.setState({
-        review: Object.assign(this.state.review, { [field]: e.target.value})
+        review: Object.assign(this.state.review, { 'rating': rating})
      });
-   };
   }
 
   render() {
     return(
       <div className="review-container">
+        <span className='review-modal-header'>Leave a review</span>
         <div>
-          <h3 id="review-body">Rate your experience!</h3>
+          <span className="review-modal-sub-header">Stars</span>
+            <ReactStars
+              className="react-stars-review"
+              count={5} size={34} value={this.state.review.rating}
+              onChange={(rating)=>{this.updateStarCount(rating)}} />
+        </div>
+        <div>
+          <span className="review-modal-sub-header">Comments</span>
             <textarea
                 value={this.state.body}
                 onChange={this.update('body')}
-                placeholder="Add your review!"
+                placeholder="Add your comments!"
               />
-        </div>
-        <div>
-        <h3 id="review-rating">Stars</h3>
-          <select onChange={this.updateList('rating')}>
-            <option value="" hidden >Stars</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
         </div>
         <button onClick={this.handleSubmit}>Add Review</button>
       </div>

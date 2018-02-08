@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
   justify-content: space-between;
   align-content: space-between;
   border-bottom: 1px lightgrey solid;
@@ -32,7 +34,6 @@
       letter-spacing: 0.4px;
       font-weight: normal;
       font-size: 18px;
-      line-height: 2;
     }
     ul {
       color:$bnb-darker-grey;;
@@ -55,7 +56,10 @@
 }
 
 .trip-item-details {
-  width: 250px;
+  width: 350px;
+  min-width: 350px;
+  // align-content: flex-start;
+  // min-width: 250px;
 }
 
 .review-button-main2-cancel {

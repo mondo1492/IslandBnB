@@ -164,6 +164,7 @@ class CreateRoom extends React.Component {
   }
 
   updateGeoLocation({lat, lng, address}) {
+    console.log(lat, lng, address);
     this.setState({
       room: Object.assign(this.state.room, { lat: lat, lng: lng, address: address})
     });

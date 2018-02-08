@@ -29,7 +29,7 @@
   outline: none;
   position        : fixed;
   top             : 130px;
-  left            : 45px;
+  left            : 55px;
   width           : 250px;
   max-width        : 100%;
   border-radius    : 6px;
@@ -38,11 +38,11 @@
 }
 
 .modal-guests {
-  left: 200px;
+  left: 164px;
 }
 
 .modal-price {
-  left: 355px;
+  left: 269px;
 }
 
 .modal-price-display {
@@ -54,7 +54,13 @@
 
 .help-modal {
   padding: 30px;
+  padding-bottom: 60px;
   width: 700px;
+  top: 70px;
+  position: fixed;
+  overflow: scroll;
+
+  height: 300px;
   color: $bnb-darker-grey;
   .X {
     color:  $bnb-darker-grey;

@@ -38,19 +38,6 @@ class Description extends React.Component{
         </div>
         <div className="detail-container">
           <div className="detail-item">
-            <h4>Amenities</h4>
-          </div>
-          <div className="detail-list">
-            <ul>
-              <li>
-                <h4>Nothing lol</h4>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-        <div className="detail-container">
-          <div className="detail-item">
             <h4>Price</h4>
           </div>
             <div className="detail-list">
