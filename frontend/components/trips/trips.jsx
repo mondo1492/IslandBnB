@@ -18,6 +18,7 @@ class Trips extends React.Component {
     this.showListing = this.showListing.bind(this);
     this.tripItem = this.tripItem.bind(this);
     this.formatDate = this.formatDate.bind(this);
+    this.renderTrips = this.renderTrips.bind(this);
   }
 
   componentWillMount() {
@@ -108,8 +109,34 @@ class Trips extends React.Component {
     );
   }
 
+  renderTrips(title, trips, tripStatus) {
+    if (trips.length > 0) {
+      return (
+          <div>
+            <span className="trip-status">{title}</span>
+            <ul className="trip-index">
+              {trips.map((trip, i) => (
+                this.tripItem(tripStatus, trip, i)
+              ))}
+            </ul>
+          </div>
+      );
+    } else {
+      return "";
+    }
+  }
+
+  renderNoTrips() {
+    return (
+      <div>
+        <Link to='/islands' className="trip-status no-status">No trips booked, click to search for a trip</Link>
+      </div>
+    );
+  }
+
   render() {
     const {currentTrips, futureTrips, pastTrips} = this.state;
+    const allEmpty = currentTrips.length === 0 && futureTrips.length === 0 && pastTrips.length === 0;
     return(
       <div>
         <Header/>
@@ -117,33 +144,11 @@ class Trips extends React.Component {
           <span id='trips-header-title'>Your Trips</span>
           <span id='trips-header-desc'>View current, future, and past trips</span>
         </div>
-
         <div className='trips-container'>
-          <div>
-            <span className="trip-status">Current trips</span>
-            <ul className="trip-index">
-              {currentTrips.map((trip, i) => (
-                this.tripItem('C', trip, i)
-              ))}
-            </ul>
-          </div>
-          <div>
-            <span className="trip-status">Future trips</span>
-            <ul className="trip-index">
-              {futureTrips.map((trip, i) => (
-                this.tripItem('F', trip, i)
-              ))}
-            </ul>
-          </div>
-          <div>
-            <span className="trip-status">Past trips</span>
-            <ul className="trip-index">
-              {pastTrips.reverse().map((trip, i) => (
-                this.tripItem('P', trip, i)
-              ))}
-            </ul>
-          </div>
-
+          {this.renderTrips("Current Trips", currentTrips, 'C')}
+          {this.renderTrips("Future trips", futureTrips, 'F')}
+          {this.renderTrips("Past trips", pastTrips, 'P')}
+          {allEmpty ? this.renderNoTrips() : ""}
         </div>
         <Footer onFrontPage={false}/>
       </div>

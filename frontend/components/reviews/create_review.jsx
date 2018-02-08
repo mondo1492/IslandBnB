@@ -55,4 +55,3 @@ class AddReviewModal extends React.Component {
   }
 }
 export default AddReviewModal;
-//to fill out to make code cleaner

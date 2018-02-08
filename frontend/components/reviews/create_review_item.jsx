@@ -25,9 +25,6 @@ class ReviewItem extends React.Component {
     this.props.addReview(review);
   }
 
-
-
-
   update(field) {
     return e => {
       this.setState({
@@ -72,4 +69,3 @@ class ReviewItem extends React.Component {
   }
 }
 export default ReviewItem;
-//to fill out to make code cleaner

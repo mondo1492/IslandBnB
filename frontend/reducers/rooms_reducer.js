@@ -4,7 +4,7 @@ import {
   RECEIVE_ROOM,
   REMOVE_ROOM,
   RECEIVE_ROOMS,
-  RECEIVE_ROOMS_ERRORS
+  RECEIVE_ROOM_ERRORS
 } from '../actions/room_actions';
 import {
   RECEIVE_REVIEW,
@@ -31,10 +31,10 @@ const roomReducer = (state = defaultState, action) => {
     case RECEIVE_ROOMS:
       nextState = Object.assign({}, state, { entities: action.rooms });
       return nextState;
-    case RECEIVE_ROOMS_ERRORS:
+    case RECEIVE_ROOM_ERRORS:
       let errors = action.errors;
-      nextState = merge({}, { entities: action.rooms  }, { errors });
-      // nextState = Object.assign({}, state, { errors });
+      // nextState = merge({}, { entities: action.rooms  }, { errors });
+      nextState = Object.assign({}, state, { errors });
       return nextState;
     default:
       return state;

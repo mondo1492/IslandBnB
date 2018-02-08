@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import Footer from './front_footer.jsx';
 
 class Front extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
   componentDidMount() {
     document.getElementsByClassName("front-video")[0].play();
     localStorage.clear();

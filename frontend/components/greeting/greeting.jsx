@@ -109,6 +109,7 @@ class Greeting extends React.Component {
       </nav>
     );
   }
+
   currentSession(currentUser, logout, resetErrors) {
     return (
       <nav>
@@ -228,8 +229,3 @@ class Greeting extends React.Component {
 }
 
 export default Greeting;
-// add after get everything else done
-// <input id="searchTextFieldHome"
-//   type="text"
-//   name="search"
-//   placeholder="Search by location...."></input>

@@ -4,6 +4,7 @@ import { Redirect, Route,Link, withRouter } from 'react-router-dom';
 import Header from '../header.jsx';
 import Footer from '../front_page/front_footer.jsx';
 import Select from 'react-select';
+import Modal from 'react-modal';
 import GeoLocation from './geo_location';
 
 import DropForm from './image_drop';
@@ -25,74 +26,70 @@ class CreateRoom extends React.Component {
           num_guests: 1,
           bedrooms: 1,
           beds: 1,
-          pic_url: "http://res.cloudinary.com/dluh2fsyd/image/upload/v1501036534/UFO_Phil_s_Alcatraz_Pyramid_Painting_vxlujw.jpg"
+          pic_url: ""
         },
         id: null,
-        editing: false
+        editing: false,
+        modalOpen: false
       };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderNumbers = this.renderNumbers.bind(this);
     this.updatePicUrl = this.updatePicUrl.bind(this);
     this.updateGeoLocation = this.updateGeoLocation.bind(this);
+    this.onModalClose = this.onModalClose.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     const room = nextProps.savedInfo;
-    console.log(nextProps);
-    this.setState({
-      room: {
-        title: room.title,
-        description: room.description,
-        address: room.address,
-        lng: room.lng,
-        lat: room.lat,
-        host_id: room.host_id,
-        price: room.price,
-        prop_type: room.prop_type,
-        room_type: room.room_type,
-        num_guests: room.num_guests,
-        bedrooms: room.bedrooms,
-        beds: room.beds,
-        pic_url: room.pic_url
-      },
-      id: room.id,
-      editing: nextProps.editing
-    });
-
-  }
-
-  componentWillUpdate(nextProps) {
-    if (nextProps.errors.length > 0) {
-      console.log("errors");
-      nextProps.errors.forEach(error => {
-        console.log(error);
+    if (room) {
+      this.setState({
+        room: {
+          title: room.title,
+          description: room.description,
+          address: room.address,
+          lng: room.lng,
+          lat: room.lat,
+          host_id: room.host_id,
+          price: room.price,
+          prop_type: room.prop_type,
+          room_type: room.room_type,
+          num_guests: room.num_guests,
+          bedrooms: room.bedrooms,
+          beds: room.beds,
+          pic_url: room.pic_url
+        },
+        id: room.id,
+        editing: nextProps.editing
       });
     }
+    if (nextProps.errors.length > 0) {
+      this.setState({modalOpen: true})
+    }
+  }
+
+  onModalClose() {
+    this.setState({ modalOpen: false });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const room = merge(
-      {}, {room: this.state.room},
-      {room: {host_id: this.props.currentUser.id }}
-    );
-    console.log();
     if (this.state.editing) {
-      console.log(this.state.id);
-      const room2 = merge(
+      const editRoom = merge(
         {}, {room: this.state.room},
         {room: {id: this.state.id, host_id: this.props.currentUser.id }}
       );
-      console.log(room2);
-      this.props.editRoom(room2).then(
+      this.props.editRoom(editRoom).then(
           (data) => this.props.history.push(`/listings/${this.props.currentUser.id}`)
       )
     } else {
-      this.props.createRoom(room).then(
+      const createRoom = merge(
+        {}, {room: this.state.room},
+        {room: {host_id: this.props.currentUser.id }}
+      );
+      this.props.createRoom(createRoom).then(
         (data) => this.props.history.push(`/listings/${this.props.currentUser.id}`)
       );
     }
-
   }
 
   update(field) {
@@ -111,15 +108,37 @@ class CreateRoom extends React.Component {
    };
   }
 
+  prettyErrors() {
+    let prettyErrors = []
+    this.props.errors.forEach(error=>{
+      if (error === "Prop type can't be blank") {
+        prettyErrors.push("Property Type")
+      } else if (error === "Pic url can't be blank") {
+        prettyErrors.push("Picture")
+      } else if (error !== "Lng can't be blank" &&
+                 error !== "Lat can't be blank") {
+        prettyErrors.push(`${error.split(" ")[0]}`);
+      }
+    });
+    return prettyErrors;
+  }
+
   renderErrors() {
-    return(
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
+    return (
+      <div>
+        <h2>Oops!</h2>
+        <h3>Looks like you left out some important information:</h3>
+        <ul>
+          <li className='ul-title'>A listing requires the following:</li>
+          <ul>
+            {this.prettyErrors().map((error, i) => (
+              <li key={`error-${i}`}>
+                {error}
+              </li>
+            ))}
+          </ul>
+        </ul>
+    </div>
     );
   }
 
@@ -131,7 +150,8 @@ class CreateRoom extends React.Component {
         <option
           key={i}
           onChange={this.update(val)}
-          value={i}>{i} {name}</option>
+          value={i}>{i} {name}
+        </option>
         );
       }
     return count;
@@ -155,7 +175,7 @@ class CreateRoom extends React.Component {
         <Header/>
           <div className='trips-header'>
             <span id='trips-header-title'>Create a listing</span>
-            <span id='trips-header-desc'>Include all the details you want</span>
+            <span id='trips-header-desc'>Fill out all the fields below</span>
           </div>
           <div className="new-room-form-container">
             <div className="new-room-form-box">
@@ -270,19 +290,25 @@ class CreateRoom extends React.Component {
                     >
 
                   </input>
-                  <div className="padder">
 
-                  </div>
+                  <div className="padder"></div>
 
                 <button onClick={this.handleSubmit}>Finish</button>
-                {this.renderErrors()}
+                <Modal
+                  isOpen={this.state.modalOpen}
+                  onRequestClose={this.onModalClose}
+                  className="modal help-modal"
+                  overlayClassName="modal-overlay"
+                  contentLabel="error-modal">
+                  <button className="X" onClick={this.onModalClose}>&times;</button>
+                  {this.renderErrors()}
+                </Modal>
+
                 </div>
                 <div className="map-container">
                   <GeoLocation updateGeoLocation={this.updateGeoLocation} lng={this.state.room.lng} lat={this.state.room.lat}/>
                 </div>
-
               </div>
-
           </div>
         <Footer/>
       </div>

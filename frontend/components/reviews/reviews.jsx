@@ -13,16 +13,7 @@ class RoomReviews extends React.Component {
   componentWillMount() {
     this.props.viewReviews(this.props.match.params.id);
     this.allReviews = this.allReviews.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
   }
-
-  // handleClick(e) {
-  //   e.preventDefault();
-  //   this.props.addReview(e.currentTarget.value).then(
-  //     () => this.setState(
-  //       { reviews: this.props.viewReviews(this.props.currentUser.id) }
-  //   ));
-  // }
 
   formatDate(date) {
     return strftime('%B %d, %Y', new Date(date));
@@ -63,11 +54,10 @@ class RoomReviews extends React.Component {
   addButton() {
     const reviewerName = this.props.currentUser.username;
     const roomId = this.props.match.params.id;
-    return(
+    return (
       <div>
         <AddReviewModal reviewerName={reviewerName} roomId= {roomId} addReview= {this.props.addReview}/>
       </div>
-
     );
   }
 

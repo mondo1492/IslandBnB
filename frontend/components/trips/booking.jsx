@@ -22,6 +22,7 @@ class Booking extends React.Component {
       cleaningFee: 0,
       serviceFee: 0,
       totalCost: 0,
+      confirmed: false,
       maxGuests: this.props.room.num_guests ? this.props.room.num_guests : 1
     };
 
@@ -42,8 +43,8 @@ class Booking extends React.Component {
   }
 
   handleSubmit() {
-    const { startDate, endDate, totalCost } = this.state;
-    if (startDate && endDate) {
+    const { startDate, endDate, totalCost, confirmed} = this.state;
+    if (startDate && endDate && confirmed) {
       const booking = merge(
         {}, { booking: this.state.booking },
         { booking:
@@ -56,7 +57,9 @@ class Booking extends React.Component {
           }
         });
       this.props.addTrip(booking).then( ()=> {this.props.history.push('/trips');} );
-    } else {
+    } else if (startDate && endDate) {
+      this.setState({confirmed: true});
+    }else {
       this.setState({ focusedInput: 'startDate'});
     }
   }
@@ -162,9 +165,16 @@ class Booking extends React.Component {
   }
 
   bookButton() {
-    return (
-      <button value={this.state.totalCost} onClick={()=>this.handleSubmit()}>Request to Book</button>
-    );
+    const confirmed = this.state.confirmed;
+    if (confirmed) {
+      return (
+        <button value={this.state.totalCost} onClick={()=>this.handleSubmit()}>Approved! Click to Confirm</button>
+      )
+    } else {
+      return (
+        <button onClick={()=>this.handleSubmit()}>Request to Book</button>
+      );
+    }
   }
 
   showButton() {

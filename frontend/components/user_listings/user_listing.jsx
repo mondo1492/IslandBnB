@@ -31,6 +31,8 @@ class UserListings extends React.Component {
 
   allRoomListed() {
     return(
+      <div>
+      <span className="trip-status">Current listings</span>
       <ul className="trip-index">
         {this.props.entities.reverse().map((room, i) => (
           <li key={`room-${i}`}>
@@ -64,13 +66,14 @@ class UserListings extends React.Component {
           </li>
         ))}
       </ul>
+      </div>
     );
   }
 
   render() {
     const displayAllRooms = this.allRoomListed();
     const username = this.props.currentUser.username ? this.props.currentUser.username : "";
-    return(
+    return (
       <div>
         <Header/>
           <div className='trips-header'>
@@ -79,8 +82,13 @@ class UserListings extends React.Component {
           </div>
           <div className='trips-container'>
             <div>
-              <span className="trip-status">Current listings</span>
-              {displayAllRooms}
+              {this.props.entities.length > 0 ?
+                displayAllRooms :
+                <Link to='/create/'
+                  className="trip-status no-status">
+                  No listings posted, click to create a listing
+                </Link>
+              }
             </div>
           </div>
         <Footer/>

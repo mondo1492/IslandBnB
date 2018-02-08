@@ -108,7 +108,6 @@ class Search extends React.Component {
   }
 
   handleMarkerClick(roomid) {
-    console.log(roomid);
     this.props.history.push(`/rooms/${roomid}`);
   }
 
