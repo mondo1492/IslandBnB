@@ -6,6 +6,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import  LeftLowerNav  from './nav_bar/left_lower_nav';
 import MainDisplayContainer from './main_display/main_display_container';
 import CreateRoomContainer from './rooms/room_container';
+import EditRoomContainer from './rooms/editRoomContainer';
 import GeoLocation from './rooms/geo_location';
 import GoogleMap from './google_map/map';
 import ListingsContainer from './user_listings/user_listings_container';
@@ -24,6 +25,7 @@ const App = () => (
         <Route exact path="/trips" component={  UserTripsContainer } />
         <Route exact path="/rooms/:id" component={ ShowRoomContainer } />
         <ProtectedRoute exact path="/create" component={ CreateRoomContainer }/>
+        <ProtectedRoute exact path="/edit/:id" component={ EditRoomContainer }/>
         <ProtectedRoute path="/listings/:id" component={ ListingsContainer }/>
 
       </Switch>

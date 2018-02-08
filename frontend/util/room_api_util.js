@@ -21,12 +21,16 @@ export const deleteRoom = id => (
   })
 );
 
-export const editRoom = room => (
+export const editRoom = room => {
+  console.log("ROOM THAT IS BEING EDITED", room);
+  console.log("ROOM THAT IS BEING EDITED", room);
+  return (
   $.ajax({
     method: 'PATCH',
-    url: `api/rooms/${room.id}`
+    url: `api/rooms/${room.room.id}`,
+    data: room
   })
-);
+)};
 
 export const showRoom = id => (
   $.ajax({

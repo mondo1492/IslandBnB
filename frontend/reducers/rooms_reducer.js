@@ -33,7 +33,8 @@ const roomReducer = (state = defaultState, action) => {
       return nextState;
     case RECEIVE_ROOMS_ERRORS:
       let errors = action.errors;
-      nextState = Object.assign({}, state, { errors });
+      nextState = merge({}, { entities: action.rooms  }, { errors });
+      // nextState = Object.assign({}, state, { errors });
       return nextState;
     default:
       return state;

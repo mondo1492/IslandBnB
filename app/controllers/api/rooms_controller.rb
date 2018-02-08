@@ -8,6 +8,15 @@ class Api::RoomsController < ApplicationController
     @room = Room.includes(:user, :reviews).find(params[:id])
   end
 
+  def update
+    @room = Room.includes(:user, :reviews).find(params[:id])
+    if @room.update(room_params)
+      render :show
+    else
+      render json: @room.errors.full_messages, status: 422
+    end
+  end
+
   def create
     @room = Room.new(room_params)
     if @room.save
