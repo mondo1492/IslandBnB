@@ -16,9 +16,11 @@
     display: none;
     position: absolute;
     right: 0;
-    top: 64px;
+    top: 80px;
+    margin-right: 10px;
     background-color: white;
     min-width: 260px;
+    width: 400px;
     z-index: 1;
     box-shadow: 0 0 2px 0px grey;
 }
