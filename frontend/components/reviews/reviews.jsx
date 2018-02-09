@@ -27,7 +27,7 @@ class RoomReviews extends React.Component {
         {this.props.reviews.reverse().map((review, i) =>(
           <li className="review-index-item" key={review.id}>
             <div className="top-of-review">
-              <img src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1501181760/reviewer_iyelfn.png"></img>
+              <img src="https://res.cloudinary.com/dluh2fsyd/image/upload/v1501181760/reviewer_iyelfn.png"></img>
               <div className="review-details">
                 <div className='review-name'>{review.reviewer_name ? review.reviewer_name : "" }</div>
                 <div className='review-date'>{review.created_at ? this.formatDate(review.created_at) : "" }</div>
@@ -35,7 +35,7 @@ class RoomReviews extends React.Component {
                   <ReactStars
                       className="react-stars"
                       count={5} size={12} color2={'#008489'}
-                      value={review.rating ? review.rating : ""} edit={false} />
+                      value={review.rating ? review.rating : 0} edit={false} />
                   </div>
                 </div>
               </div>

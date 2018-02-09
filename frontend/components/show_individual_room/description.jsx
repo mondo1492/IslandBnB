@@ -7,7 +7,7 @@ class Description extends React.Component{
     return(
       <div className="show-page-description">
         <h2>About this listing</h2>
-        <h4>The space</h4>
+        <h4>The island</h4>
         <p>{room.description ? room.description : "" }</p>
       </div>
     );

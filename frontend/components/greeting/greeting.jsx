@@ -121,7 +121,7 @@ class Greeting extends React.Component {
         </button>
         <div className="dropdown">
           <button className="dropbtn" data-toggle="dropdown-toggle">
-            <img src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1500516308/users_oq566g.svg" height="45" width="45"></img>
+            <img src="https://res.cloudinary.com/dluh2fsyd/image/upload/v1500516308/users_oq566g.svg" height="45" width="45"></img>
           </button>
           <div className="dropdown-content">
             <ul className="dropdown-menu">

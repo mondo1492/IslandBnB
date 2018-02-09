@@ -13,7 +13,7 @@ class Front extends React.Component {
       <section className="front-page">
         <div className="front-page-container">
           <video className="front-video" height="500" width="890" loop>
-            <source src="http://res.cloudinary.com/dluh2fsyd/video/upload/v1516825950/waves_njc6dg.mp4" type="video/mp4"/>
+            <source src="https://res.cloudinary.com/dluh2fsyd/video/upload/v1516825950/waves_njc6dg.mp4" type="video/mp4"/>
           </video>
           <div className="front-video-overlay">
             <div className="overlay-header">Island BnB</div>

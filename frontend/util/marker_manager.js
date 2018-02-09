@@ -51,7 +51,7 @@ export default class MarkerManager {
       position: currentMarker.position,
       map: this.map,
       label: {text: currentMarker.label.text, color: "black"},
-      icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
+      icon: 'https://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
       // animation: google.maps.Animation.DROP,
       roomId: currentMarker.roomId,
       room: currentMarker.room
@@ -72,7 +72,7 @@ export default class MarkerManager {
       position: currentMarker.position,
       map: this.map,
       label: {text: currentMarker.label.text, color: "white"},
-      icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
+      icon: 'https://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
       roomId: currentMarker.roomId,
       room: currentMarker.room,
       zIndex: google.maps.Marker.MAX_ZINDEX + 1
@@ -95,7 +95,7 @@ export default class MarkerManager {
       position: pos,
       map: this.map,
       label: {text: `$${room.price}`, color: "black"},
-      icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
+      icon: 'https://res.cloudinary.com/dluh2fsyd/image/upload/v1500947278/gmap_icon_b2iudh.png',
       roomId: room.id,
       room: room
     });
