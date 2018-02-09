@@ -22,9 +22,9 @@ class Search extends React.Component {
     this.state = {
       bed_params: { min: storedBedMin ? storedBedMin : 0, max: 50},
       bed_min: storedBedMin ? storedBedMin : 0,
-      price_params: { min: storedPriceMin ? storedPriceMin : 0, max: 10000},
+      price_params: { min: storedPriceMin ? storedPriceMin : 0, max: 100000},
       price_min: storedPriceMin ? storedPriceMin : 0,
-      price_max: storedPriceMax ? storedPriceMax : 10000,
+      price_max: storedPriceMax ? storedPriceMax : 1000,
       guest_params: { min: storedGuestMin ? storedGuestMin : 1, max: 50},
       guest_min: storedGuestMin ? storedGuestMin : 1,
       modalOpen1: false,
@@ -56,9 +56,9 @@ class Search extends React.Component {
     this.updateRooms();
     const searchMap = this.refs.searchMap;
     const mapOptions = {
-      center: {lat: 0,
-      lng: -20},
-      zoom: 2,
+      center: {lat: 14.540111,
+      lng: -74.967637},
+      zoom: 4,
       minZoom: 2,
       styles: STYLING.GMAPSTYLE
     };
@@ -135,13 +135,14 @@ class Search extends React.Component {
   }
 
   apply() {
+    const maxPrice = this.state.price_max === 1000 ? 100000 : this.state.price_max;
     this.setState({
       modalOpen1: false,
       modalOpen2: false,
       modalOpen3: false,
       bed_params: Object.assign(this.state.bed_params, { min: this.state.bed_min}),
       guest_params: Object.assign(this.state.guest_params, { min: this.state.guest_min }),
-      price_params: Object.assign(this.state.price_params, { min: this.state.price_min, max: this.state.price_max})
+      price_params: Object.assign(this.state.price_params, { min: this.state.price_min, max: maxPrice})
     }, () => this.savePresets());
     this.updateRooms(this.state.bounds);
   }
@@ -214,11 +215,11 @@ class Search extends React.Component {
   }
 
   priceDisplay() {
-      if (this.state.price_min === 0 && this.state.price_max < 10000) {
+      if (this.state.price_min === 0 && this.state.price_max < 1000) {
         return `Up to $${this.state.price_max}`;
-      } else if (this.state.price_min > 0 && this.state.price_max < 10000) {
+      } else if (this.state.price_min > 0 && this.state.price_max < 1000) {
         return `$${this.state.price_min} - $${this.state.price_max}`;
-      } else if (this.state.price_min > 0 && this.state.price_max === 10000) {
+      } else if (this.state.price_min > 0 && this.state.price_max === 1000) {
         return `$${this.state.price_min}+`;
       } else {
         return `Price`;
@@ -293,7 +294,7 @@ class Search extends React.Component {
               </Modal>
           </li>
           <li>
-            <button className={ (priceMin === 0 && priceMax === 10000) ? "filter-button" : "filter-button-selected"} onClick={this.openModal3}>
+            <button className={ (priceMin === 0 && priceMax === 1000) ? "filter-button" : "filter-button-selected"} onClick={this.openModal3}>
               <div className="filter-button-text">
                 {this.priceDisplay()}
               </div>
@@ -304,12 +305,12 @@ class Search extends React.Component {
                 className="modal-price"
                 overlayClassName="modal-overlay">
                   <div className='modal-price-display'>
-                    {`$${priceMin} - $${priceMax === 10000 ? `10000+` : priceMax}`}
+                    {`$${priceMin} - $${priceMax === 1000 ? `1000+` : priceMax}`}
                   </div>
                   <div className='bed-content'>
                   <Range
                     min={0}
-                    max={10000}
+                    max={1000}
                     className='range-slider'
                     defaultValue={[priceMin, priceMax]}
                     tipFormatter={ value => `$${value}`}
@@ -331,7 +332,7 @@ class Search extends React.Component {
 resetFilters() {
   this.setState({
     price_min: 0,
-    price_max: 10000,
+    price_max: 1000,
     bed_min: 0,
     guest_min: 1
   }, () => this.savePresets());
