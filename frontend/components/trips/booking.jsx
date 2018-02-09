@@ -7,6 +7,7 @@ import moment from 'moment';
 class Booking extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.room);
     this.state = {
       focusedInput: null,
       startDate: null,
@@ -16,14 +17,14 @@ class Booking extends React.Component {
         num_guests: 1,
         total_cost: 0
       },
-      pricePerNight: this.props.room.price,
+      pricePerNight: 0,
       dayCount: 0,
       dayCountSumCost: 0,
       cleaningFee: 0,
       serviceFee: 0,
       totalCost: 0,
       confirmed: false,
-      maxGuests: this.props.room.num_guests ? this.props.room.num_guests : 1
+      maxGuests: 0
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,6 +41,14 @@ class Booking extends React.Component {
     this.props.getAllTripsSpecific(this.props.match.params.id).then(()=> {
       this.blockOutDates();
     });
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      pricePerNight: nextProps.room.price,
+      maxGuests: nextProps.room.num_guests
+    })
   }
 
   handleSubmit() {
