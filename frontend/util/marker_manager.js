@@ -68,14 +68,14 @@ export default class MarkerManager {
   }
 
   createMarkerFromMarker(currentMarker, infowindow, handleClick) {
-    console.log(currentMarker.label);
     const marker = new google.maps.Marker({
       position: currentMarker.position,
       map: this.map,
       label: {text: currentMarker.label.text, color: "white"},
       icon: 'http://res.cloudinary.com/dluh2fsyd/image/upload/v1517524135/gmap_icon_b2iudh2_c0q1rp.png',
       roomId: currentMarker.roomId,
-      room: currentMarker.room
+      room: currentMarker.room,
+      zIndex: google.maps.Marker.MAX_ZINDEX + 1
     });
     this.markers[marker.roomId] = marker;
   }
