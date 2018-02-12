@@ -43,7 +43,6 @@ class DropForm extends React.Component {
 
   defaultUrl(e) {
     e.preventDefault();
-    console.log("HELLO");
     const defaultURL = 'https://i.ytimg.com/vi/r5U2RLT-Gg4/maxresdefault.jpg';
     this.props.updateUrl(defaultURL);
     this.setState({uploadedFileCloudinaryUrl: defaultURL})

@@ -4,11 +4,10 @@ import Trips from './trips';
 import { viewTrips, deleteTrip } from '../../actions/trip_actions';
 import { withRouter } from 'react-router';
 
-const mapStateToProps = ({ session, trips }, ownProps) => {
-  return({
+const mapStateToProps = ({ session, trips }, ownProps) => ({
   trips: values(trips.trips) || [],
   currentUser: session.currentUser
-});};
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

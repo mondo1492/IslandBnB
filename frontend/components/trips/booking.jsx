@@ -7,7 +7,6 @@ import moment from 'moment';
 class Booking extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.room);
     this.state = {
       focusedInput: null,
       startDate: null,

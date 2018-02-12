@@ -1,7 +1,6 @@
 import React from 'react';
 
 class Features extends React.Component{
-
   render() {
     const room = this.props.room;
     const guest = room.num_guests === 1 ? " guest" : " guests";

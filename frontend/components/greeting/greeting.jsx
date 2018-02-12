@@ -178,7 +178,6 @@ class Greeting extends React.Component {
   }
 
   render() {
-    console.log("GREETING", this.props);
     const { currentUser, logout, resetErrors } = this.props;
     const leftDisplay = currentUser ? this.currentSession(currentUser, logout, resetErrors) : this.newSessionLinks();
     const form = (this.state.signIn) ? <SessionFormContainer formType={"login"}/> : <SessionFormContainer formType={"signup"}/>;

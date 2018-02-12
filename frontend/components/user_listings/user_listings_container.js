@@ -5,19 +5,15 @@ import { viewListings } from '../../actions/listing_actions';
 import { deleteRoom } from '../../actions/room_actions';
 import { withRouter } from 'react-router';
 
-const mapStateToProps = ({ session, listing}) => {
-  return {
+const mapStateToProps = ({ session, listing}) => ({
     entities: values(listing.entities),
     currentUser: session.currentUser
-  };
-};
+  });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
+const mapDispatchToProps = (dispatch) => ({
     getUserListings: currentUserId => dispatch(viewListings(currentUserId)),
     deleteRoom: room => dispatch(deleteRoom(room))
-  };
-};
+  });
 
 export default withRouter(connect(
   mapStateToProps,

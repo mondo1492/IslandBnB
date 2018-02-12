@@ -5,7 +5,7 @@ import Header from '../header.jsx';
 import MarkerManager from '../../util/marker_manager';
 import MainDisplayContainer from '../main_display/main_display_container';
 import * as LSHelper from './local_storage_helper';
-import Filters from './filters2';
+import Filters from './filters';
 
 const STYLING = require('./gmap_style.jsx');
 

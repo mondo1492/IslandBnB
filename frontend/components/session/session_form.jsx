@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -53,7 +52,6 @@ class SessionForm extends React.Component {
   defaultUserButton() {
     return(
         <div id="defaultUser" type="" onClick={this.defaultUser}>Guest Login</div>
-
     );
   }
 

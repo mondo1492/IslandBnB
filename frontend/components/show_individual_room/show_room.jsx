@@ -96,10 +96,8 @@ class ShowRoom extends React.Component {
 
   render(){
     const room = this.props.room;
-    // const showBooking = this.props.currentUser ? this.showBooking() : "";
-
     let alternate = this.state.alternate;
-    return(
+    return (
       <div>
         <Header/>
       <div>

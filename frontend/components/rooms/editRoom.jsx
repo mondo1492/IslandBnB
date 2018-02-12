@@ -13,16 +13,12 @@ class EditRoom extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     this.props.showRoom(this.props.match.params.id).then(()=>{
       this.setState({room: this.props.room});
     });
   }
-  componentWillUpdate() {
-    console.log(this.props);
-  }
+
   render() {
-    console.log("RERENDER", this.props);
     return (
       <CreateRoom savedInfo={this.state.room} editing={true} />
     );
