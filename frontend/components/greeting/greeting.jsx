@@ -178,6 +178,7 @@ class Greeting extends React.Component {
   }
 
   render() {
+    console.log("GREETING", this.props);
     const { currentUser, logout, resetErrors } = this.props;
     const leftDisplay = currentUser ? this.currentSession(currentUser, logout, resetErrors) : this.newSessionLinks();
     const form = (this.state.signIn) ? <SessionFormContainer formType={"login"}/> : <SessionFormContainer formType={"signup"}/>;
@@ -191,7 +192,7 @@ class Greeting extends React.Component {
               height="50" width="50">
             </img>
           </a>
-          { this.props.location.pathname === "/islands/" ?
+          { this.props.match.path === "/islands" ?
             <div>
           <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true" focusable="false" className='magnifying-glass'>
             <path d="m10.4 18.2c-4.2-.6-7.2-4.5-6.6-8.8.6-4.2 4.5-7.2
@@ -201,7 +202,6 @@ class Greeting extends React.Component {
               5c .3.3.8.3 1.1 0s .4-.8.1-1.1" fillRule="evenodd">
             </path>
           </svg>
-
             <input id="searchTextFieldHome"
               type="text"
               name="search"
