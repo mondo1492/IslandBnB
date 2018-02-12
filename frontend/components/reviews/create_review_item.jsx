@@ -10,7 +10,7 @@ class ReviewItem extends React.Component {
       modalOpen: false,
       signIn: false,
       review: {
-        rating: "",
+        rating: 0,
         body: ""
       }
     };
