@@ -26,6 +26,7 @@ class Search extends React.Component {
         guestMin: guestMin ? guestMin : 1
       },
       toggler: null,
+      noFiltersApplied: true,
       bounds: {
         northEast: {lat: 37.873972, lng: -122.331297},
         southWest: {lat: 37.673972, lng: -122.531297}
@@ -39,6 +40,8 @@ class Search extends React.Component {
     this.updateBed = this.updateBed.bind(this);
     this.updateGuest = this.updateGuest.bind(this);
     this.updatePrice = this.updatePrice.bind(this);
+    this.resetFilters = this.resetFilters.bind(this);
+    this.noFiltersApplied = this.noFiltersApplied.bind(this);
   }
 
   componentDidMount() {
@@ -120,6 +123,15 @@ class Search extends React.Component {
         this.updatePrice([0, 1000]);
         break;
     }
+  }
+
+  noFiltersApplied() {
+    return (
+      this.state.params.bedParams.min === 0 &&
+      this.state.params.priceParams.min === 0 &&
+      this.state.params.priceParams.max === 1000 &&
+      this.state.params.guestParams.min === 1
+    );
   }
 
   cancelChange(modalType) {
@@ -241,6 +253,8 @@ class Search extends React.Component {
             applyChange={this.applyChange}
             updatePrice={this.updatePrice}
             clearChange={this.clearChange}
+            resetFilters={this.resetFilters}
+            noFiltersApplied={this.noFiltersApplied}
           />
         <div className='rooms-map-main-container'>
           <MainDisplayContainer resetFilters={this.resetFilters} />

@@ -153,6 +153,15 @@ class Filters extends React.Component {
                 </div>
               </Modal>
           </li>
+          { this.props.noFiltersApplied() ? "" :
+            <li>
+              <button className='filter-button' onClick={() => this.props.resetFilters()}>
+                <div className="filter-button-text">
+                  Reset Filters
+                </div>
+              </button>
+            </li>
+          }
         </ul>
       </div>
       </div>
