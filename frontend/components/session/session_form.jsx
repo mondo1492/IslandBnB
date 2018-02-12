@@ -46,7 +46,7 @@ class SessionForm extends React.Component {
   }
 
   defaultUser(e) {
-    const guestUser = Object.assign({}, { user: {username:"Guest User", password:"SuperSecretPassword"}});
+    const guestUser = Object.assign({}, { user: {username:"Jack Sparrow", password:"pirateMan"}});
     this.props.guestLogin(guestUser);
   }
 

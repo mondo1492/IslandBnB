@@ -46,7 +46,7 @@ class AddReviewModal extends React.Component {
             overlayClassName="modal-overlay"
             contentLabel="add-review"
             >
-            <button className="X" onClick={this.onModalClose}>&times;</button>
+            <button className="X place-right" onClick={this.onModalClose}>&times;</button>
             <CreateReviewItem reviewerName={reviewerName} roomId={roomId} addReview={this.props.addReview}/>
           </Modal>
       </div>
