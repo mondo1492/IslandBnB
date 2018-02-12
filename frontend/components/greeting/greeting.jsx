@@ -187,7 +187,7 @@ class Greeting extends React.Component {
         <div className="left-header-group">
             <a href="/">
             <img
-              src="http://res.cloudinary.com/dluh2fsyd/image/upload/v1517973156/sun_kfemxc.svg"
+              src="https://res.cloudinary.com/dluh2fsyd/image/upload/v1517973156/sun_kfemxc.svg"
               height="50" width="50">
             </img>
           </a>
