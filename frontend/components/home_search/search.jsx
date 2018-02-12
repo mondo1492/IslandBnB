@@ -216,8 +216,13 @@ class Search extends React.Component {
         priceMax: 1000,
         bedMin: 0,
         guestMin: 1
-      })
-    }, () => LSHelper.savePresets(this.state.params));
+      }),
+      params: Object.assign({}, this.state.params, {
+        bedParams: { min: 0, max: 50},
+        priceParams: { min: 0, max: 1000},
+        guestParams: { min: 1, max: 50}
+      }),
+    }, () => this.updateRooms());
   }
 
   render() {
