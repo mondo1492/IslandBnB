@@ -1,5 +1,5 @@
-# Spacebnb
-URL: [Live Link](https://space-bnb.herokuapp.com)
+# Islandbnb
+URL: [Live Link](https://islandbnb.site)
 
 Islandbnb is an Airbnb clone with a island-theme twist.  It is a full-stack, single-page, web application built using Ruby on Rails, a PostGreSQL database, React/Redux, Google Maps and Cloudinary.
 
